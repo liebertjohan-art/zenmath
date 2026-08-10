@@ -20,12 +20,12 @@
 - [x] Connect the full flow: Home -> Select Difficulty -> Practice -> Results -> Home.
 
 ## Phase 2: Polish & Gamification (The Gold Layer)
-- [ ] Implement actual Streak Tracking logic.
-- [ ] Animate Home Screen topic cards (Staggered Entrance).
-- [ ] Add `AnimatedSwitcher` for smooth question transitions in Practice Arena.
-- [ ] Add wrong-answer shake animation and correct-answer soft glow.
-- [ ] Integrate Haptic Feedback (`HapticFeedback.lightImpact()` on numpad, `mediumImpact` on completion).
-- [ ] Implement the Growth Graph using `fl_chart` on the Home Screen.
+- [x] Implement actual Streak Tracking logic.
+- [x] Animate Home Screen topic cards (Staggered Entrance).
+- [x] Add `AnimatedSwitcher` for smooth question transitions in Practice Arena.
+- [x] Add wrong-answer shake animation and correct-answer soft glow.
+- [x] Integrate Haptic Feedback (`HapticFeedback.lightImpact()` on numpad, `mediumImpact` on completion).
+- [x] Implement the Growth Graph using `fl_chart` on the Home Screen.
 
 ## Phase 3: Expansion (Future P2 Features)
 - [ ] Add more topics: Percentages, Fractions, Decimals, Algebra basics.

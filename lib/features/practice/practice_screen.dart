@@ -1,20 +1,24 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/widgets/zen_scaffold.dart';
 import '../../core/widgets/zen_numpad.dart';
+import '../../providers/progress_provider.dart';
+import '../../providers/streak_provider.dart';
 
-class PracticeScreen extends StatefulWidget {
+class PracticeScreen extends ConsumerStatefulWidget {
   final String topic;
   final String difficulty;
 
   const PracticeScreen({super.key, required this.topic, required this.difficulty});
 
   @override
-  State<PracticeScreen> createState() => _PracticeScreenState();
+  ConsumerState<PracticeScreen> createState() => _PracticeScreenState();
 }
 
-class _PracticeScreenState extends State<PracticeScreen> {
+class _PracticeScreenState extends ConsumerState<PracticeScreen> {
   final Random _random = Random();
   late int num1;
   late int num2;
@@ -24,6 +28,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
   int score = 0;
   final int totalQuestions = 10;
   Color _feedbackColor = Colors.transparent;
+  double _shakeOffset = 0;
 
   @override
   void initState() {
@@ -47,6 +52,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
 
   void _onNumber(int num) {
     if (userInput.length < 5) {
+      HapticFeedback.lightImpact();
       setState(() {
         userInput += num.toString();
         _feedbackColor = Colors.transparent;
@@ -56,6 +62,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
 
   void _onDelete() {
     if (userInput.isNotEmpty) {
+      HapticFeedback.lightImpact();
       setState(() {
         userInput = userInput.substring(0, userInput.length - 1);
         _feedbackColor = Colors.transparent;
@@ -73,6 +80,19 @@ class _PracticeScreenState extends State<PracticeScreen> {
       _feedbackColor = isCorrect ? const Color(0xFF8BA888) : const Color(0xFFE07A5F);
       if (isCorrect) {
         score++;
+        HapticFeedback.mediumImpact();
+      } else {
+        HapticFeedback.heavyImpact();
+        _shakeOffset = 15;
+        Future.delayed(const Duration(milliseconds: 50), () {
+          if (mounted) setState(() => _shakeOffset = -15);
+        });
+        Future.delayed(const Duration(milliseconds: 100), () {
+          if (mounted) setState(() => _shakeOffset = 15);
+        });
+        Future.delayed(const Duration(milliseconds: 150), () {
+          if (mounted) setState(() => _shakeOffset = 0);
+        });
       }
     });
 
@@ -86,6 +106,13 @@ class _PracticeScreenState extends State<PracticeScreen> {
           _feedbackColor = Colors.transparent;
         });
       } else {
+        ref.read(progressProvider).saveSession(
+          widget.topic,
+          widget.difficulty,
+          score,
+          totalQuestions,
+        );
+        ref.invalidate(streakProvider);
         context.pushReplacement('/results', extra: {
           'topic': widget.topic,
           'difficulty': widget.difficulty,
@@ -116,32 +143,48 @@ class _PracticeScreenState extends State<PracticeScreen> {
           children: [
             Expanded(
               child: Center(
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
-                  padding: const EdgeInsets.all(48),
-                  decoration: BoxDecoration(
-                    color: _feedbackColor.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(32),
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        '$num1 $operatorSymbol $num2',
-                        style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 64),
-                      ),
-                      const SizedBox(height: 24),
-                      AnimatedSwitcher(
-                        duration: const Duration(milliseconds: 150),
-                        child: Text(
-                          userInput.isEmpty ? '?' : userInput,
-                          key: ValueKey<String>(userInput),
-                          style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                            color: userInput.isEmpty ? Colors.grey : const Color(0xFFD4AF37),
+                child: Transform.translate(
+                  offset: Offset(_shakeOffset, 0),
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    padding: const EdgeInsets.all(48),
+                    decoration: BoxDecoration(
+                      color: _feedbackColor.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(32),
+                      boxShadow: _feedbackColor == Colors.transparent
+                          ? []
+                          : [
+                              BoxShadow(
+                                color: _feedbackColor.withOpacity(0.3),
+                                blurRadius: 30,
+                                spreadRadius: 5,
+                              ),
+                            ],
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 300),
+                          child: Text(
+                            '$num1 $operatorSymbol $num2',
+                            key: ValueKey<int>(currentQuestionIndex),
+                            style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 64),
                           ),
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 24),
+                        AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 150),
+                          child: Text(
+                            userInput.isEmpty ? '?' : userInput,
+                            key: ValueKey<String>(userInput),
+                            style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                              color: userInput.isEmpty ? Colors.grey : const Color(0xFFD4AF37),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
