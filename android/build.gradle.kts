@@ -12,27 +12,30 @@ subprojects {
     val newSubprojectBuildDir: Directory = newBuildDir.dir(project.name)
     project.layout.buildDirectory.value(newSubprojectBuildDir)
 
-    val configureNamespace = {
+    val configureAndroidExt = {
         val androidExt = project.extensions.findByName("android")
         if (androidExt != null) {
             try {
                 val clazz = androidExt.javaClass
-                val getNamespace = clazz.getMethod("getNamespace")
-                val namespace = getNamespace.invoke(androidExt)
-                if (namespace == null) {
-                    val setNamespace = clazz.getMethod("setNamespace", String::class.java)
-                    setNamespace.invoke(androidExt, project.group.toString())
+                try {
+                    clazz.getMethod("compileSdkVersion", Int::class.java).invoke(androidExt, 34)
+                } catch(e: Exception) {
+                    clazz.getMethod("setCompileSdkVersion", Int::class.java).invoke(androidExt, 34)
                 }
-            } catch (e: Exception) {
-                // Ignore
-            }
+            } catch(e: Exception) {}
+
+            try {
+                val clazz = androidExt.javaClass
+                if (clazz.getMethod("getNamespace").invoke(androidExt) == null) {
+                    clazz.getMethod("setNamespace", String::class.java).invoke(androidExt, project.group.toString())
+                }
+            } catch(e: Exception) {}
         }
     }
-
     if (project.state.executed) {
-        configureNamespace()
+        configureAndroidExt()
     } else {
-        project.afterEvaluate { configureNamespace() }
+        project.afterEvaluate { configureAndroidExt() }
     }
 }
 
