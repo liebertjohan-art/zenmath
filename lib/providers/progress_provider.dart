@@ -13,7 +13,7 @@ final weeklyProgressProvider = FutureProvider.autoDispose<List<DailyProgress>>((
   final now = DateTime.now();
   final weekAgo = DateTime(now.year, now.month, now.day).subtract(const Duration(days: 6));
   
-  final allProgress = await isar.collection<DailyProgress>().findAll();
+  final allProgress = await isar.collection<DailyProgress>().where().findAll();
   
   final weekly = allProgress.where((p) => !p.date.isBefore(weekAgo)).toList();
   weekly.sort((a, b) => a.date.compareTo(b.date));
@@ -42,7 +42,7 @@ class ProgressService {
     await isar.writeTxn(() async {
       await isar.collection<SessionScore>().put(session);
 
-      final existingProgress = await isar.collection<DailyProgress>().findAll();
+      final existingProgress = await isar.collection<DailyProgress>().where().findAll();
       
       DailyProgress todayProgress;
       try {

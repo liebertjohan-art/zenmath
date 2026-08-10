@@ -7,7 +7,7 @@ final streakProvider = FutureProvider.autoDispose<int>((ref) async {
   final isarService = ref.watch(dbProvider);
   final isar = await isarService.db;
 
-  final allProgress = await isar.collection<DailyProgress>().findAll();
+  final allProgress = await isar.collection<DailyProgress>().where().findAll();
   if (allProgress.isEmpty) return 0;
 
   // Sort descending by date
