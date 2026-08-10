@@ -61,7 +61,7 @@ class AppTheme {
         onSurface: ZenColors.textPrimary,
       ),
       textTheme: textTheme,
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: ZenColors.deepSlate,
         elevation: 0,
         shape: RoundedRectangleBorder(
