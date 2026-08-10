@@ -11,17 +11,8 @@ rootProject.layout.buildDirectory.value(newBuildDir)
 subprojects {
     val newSubprojectBuildDir: Directory = newBuildDir.dir(project.name)
     project.layout.buildDirectory.value(newSubprojectBuildDir)
-}
-subprojects {
-    project.evaluationDependsOn(":app")
-}
 
-tasks.register<Delete>("clean") {
-    delete(rootProject.layout.buildDirectory)
-}
-
-subprojects {
-    afterEvaluate {
+    val configureNamespace = {
         val androidExt = project.extensions.findByName("android")
         if (androidExt != null) {
             try {
@@ -37,4 +28,18 @@ subprojects {
             }
         }
     }
+
+    if (project.state.executed) {
+        configureNamespace()
+    } else {
+        project.afterEvaluate { configureNamespace() }
+    }
+}
+
+subprojects {
+    project.evaluationDependsOn(":app")
+}
+
+tasks.register<Delete>("clean") {
+    delete(rootProject.layout.buildDirectory)
 }
