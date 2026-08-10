@@ -1,41 +1,80 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'core/theme/app_theme.dart';
+import 'core/widgets/zen_scaffold.dart';
+import 'core/widgets/zen_card.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      child: ZenMathApp(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+final _router = GoRouter(
+  initialLocation: '/',
+  routes: [
+    GoRoute(
+      path: '/',
+      builder: (context, state) => const HomeScreen(),
+    ),
+  ],
+);
+
+class ZenMathApp extends StatelessWidget {
+  const ZenMathApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'ZenMath',
+      theme: AppTheme.darkTheme,
+      routerConfig: _router,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const HomePage(),
     );
   }
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ZenScaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('ZenMath'),
+        title: Text(
+          'ZenMath',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
       ),
-      body: const Center(
-        child: Text(
-          'Hello, World! 🚀\nZenMath is ready.',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 24),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(24.0), // ZenSpacing.md
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Focus & Flow',
+                style: Theme.of(context).textTheme.displayMedium,
+              ),
+              const SizedBox(height: 32),
+              ZenCard(
+                onTap: () {},
+                child: Row(
+                  children: [
+                    const Icon(Icons.add, size: 32),
+                    const SizedBox(width: 16),
+                    Text(
+                      'Addition',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
