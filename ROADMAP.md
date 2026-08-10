@@ -11,13 +11,13 @@
 - [x] Build base wrapper widgets (`ZenScaffold`, `ZenCard`, `GlassBottomSheet`).
 
 ## Phase 1: MVP (Core Features & Flow)
-- [ ] **Data Layer:** Define Isar schemas for `SessionScore`, `DailyProgress`, and `TopicStats`.
-- [ ] **Home Screen:** Build the dashboard with static topic cards and a mockup progress ring.
-- [ ] **Topic Selection:** Build the difficulty selection bottom sheet.
-- [ ] **Practice Arena:** Build the core logic (question generation based on difficulty).
-- [ ] **Custom Numpad:** Implement the `ZenNumPad` widget with haptics.
-- [ ] **Results Screen:** Build the post-session summary screen.
-- [ ] Connect the full flow: Home -> Select Difficulty -> Practice -> Results -> Home.
+- [x] **Data Layer:** Define Isar schemas for `SessionScore`, `DailyProgress`, and `TopicStats`.
+- [x] **Home Screen:** Build the dashboard with static topic cards and a mockup progress ring.
+- [x] **Topic Selection:** Build the difficulty selection bottom sheet.
+- [x] **Practice Arena:** Build the core logic (question generation based on difficulty).
+- [x] **Custom Numpad:** Implement the `ZenNumPad` widget with haptics.
+- [x] **Results Screen:** Build the post-session summary screen.
+- [x] Connect the full flow: Home -> Select Difficulty -> Practice -> Results -> Home.
 
 ## Phase 2: Polish & Gamification (The Gold Layer)
 - [ ] Implement actual Streak Tracking logic.
