@@ -297,7 +297,7 @@ class _TopicCardState extends State<_TopicCard> with SingleTickerProviderStateMi
     String selectedDifficulty = 'easy';
     
     ZenBottomSheet.show(
-      context: context,
+      context,
       child: StatefulBuilder(
         builder: (context, setState) {
           final tokens = Theme.of(context).extension<ZenDesignTokens>()!;

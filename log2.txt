@@ -1,0 +1,546 @@
+build	Set up job	﻿2026-08-11T04:13:48.9985393Z Current runner version: '2.336.0'
+build	Set up job	2026-08-11T04:13:49.0009211Z ##[group]Runner Image Provisioner
+build	Set up job	2026-08-11T04:13:49.0010067Z Hosted Compute Agent
+build	Set up job	2026-08-11T04:13:49.0010924Z Version: 20260707.563
+build	Set up job	2026-08-11T04:13:49.0011550Z Commit: 02667638d2b423fbc733a8e32a88b44996a3ba6e
+build	Set up job	2026-08-11T04:13:49.0012281Z Build Date: 2026-07-07T19:33:50Z
+build	Set up job	2026-08-11T04:13:49.0013020Z Worker ID: {32a7d54e-ce86-42ee-ae9a-61d0a0c683b8}
+build	Set up job	2026-08-11T04:13:49.0013733Z Azure Region: westus
+build	Set up job	2026-08-11T04:13:49.0014324Z ##[endgroup]
+build	Set up job	2026-08-11T04:13:49.0015748Z ##[group]Operating System
+build	Set up job	2026-08-11T04:13:49.0016415Z Ubuntu
+build	Set up job	2026-08-11T04:13:49.0017004Z 24.04.4
+build	Set up job	2026-08-11T04:13:49.0017590Z LTS
+build	Set up job	2026-08-11T04:13:49.0018394Z ##[endgroup]
+build	Set up job	2026-08-11T04:13:49.0019083Z ##[group]Runner Image
+build	Set up job	2026-08-11T04:13:49.0019731Z Image: ubuntu-24.04
+build	Set up job	2026-08-11T04:13:49.0020323Z Version: 20260720.247.2
+build	Set up job	2026-08-11T04:13:49.0021586Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260720.247/images/ubuntu/Ubuntu2404-Readme.md
+build	Set up job	2026-08-11T04:13:49.0023309Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260720.247
+build	Set up job	2026-08-11T04:13:49.0024283Z ##[endgroup]
+build	Set up job	2026-08-11T04:13:49.0025362Z ##[group]GITHUB_TOKEN Permissions
+build	Set up job	2026-08-11T04:13:49.0027515Z Contents: write
+build	Set up job	2026-08-11T04:13:49.0028190Z Metadata: read
+build	Set up job	2026-08-11T04:13:49.0028783Z ##[endgroup]
+build	Set up job	2026-08-11T04:13:49.0030947Z Secret source: Actions
+build	Set up job	2026-08-11T04:13:49.0032065Z Prepare workflow directory
+build	Set up job	2026-08-11T04:13:49.0363933Z Prepare all required actions
+build	Set up job	2026-08-11T04:13:49.0437460Z Getting action download info
+build	Set up job	2026-08-11T04:13:49.3902108Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+build	Set up job	2026-08-11T04:13:49.8831293Z Download action repository 'actions/setup-java@v5' (SHA:b6effb05e454b25005698d916606bdc6ffcbf961)
+build	Set up job	2026-08-11T04:13:50.4855416Z Download action repository 'actions/cache@v4' (SHA:0057852bfaa89a56745cba8c7296529d2fc39830)
+build	Set up job	2026-08-11T04:13:50.6271986Z Download action repository 'subosito/flutter-action@v2' (SHA:1a449444c387b1966244ae4d4f8c696479add0b2)
+build	Set up job	2026-08-11T04:13:51.0650734Z Getting action download info
+build	Set up job	2026-08-11T04:13:51.1807689Z Download action repository 'actions/cache@v5' (SHA:caa296126883cff596d87d8935842f9db880ef25)
+build	Set up job	2026-08-11T04:13:51.3137686Z Complete job name: build
+build	Checkout repository	﻿2026-08-11T04:13:51.3881212Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+build	Checkout repository	2026-08-11T04:13:51.3889435Z ##[group]Run actions/checkout@v4
+build	Checkout repository	2026-08-11T04:13:51.3890258Z with:
+build	Checkout repository	2026-08-11T04:13:51.3891005Z   repository: liebertjohan-art/zenmath
+build	Checkout repository	2026-08-11T04:13:51.3893924Z   token: ***
+build	Checkout repository	2026-08-11T04:13:51.3894449Z   ssh-strict: true
+build	Checkout repository	2026-08-11T04:13:51.3894872Z   ssh-user: git
+build	Checkout repository	2026-08-11T04:13:51.3895279Z   persist-credentials: true
+build	Checkout repository	2026-08-11T04:13:51.3895811Z   clean: true
+build	Checkout repository	2026-08-11T04:13:51.3896258Z   sparse-checkout-cone-mode: true
+build	Checkout repository	2026-08-11T04:13:51.3896774Z   fetch-depth: 1
+build	Checkout repository	2026-08-11T04:13:51.3897234Z   fetch-tags: false
+build	Checkout repository	2026-08-11T04:13:51.3897655Z   show-progress: true
+build	Checkout repository	2026-08-11T04:13:51.3898117Z   lfs: false
+build	Checkout repository	2026-08-11T04:13:51.3898513Z   submodules: false
+build	Checkout repository	2026-08-11T04:13:51.3899106Z   set-safe-directory: true
+build	Checkout repository	2026-08-11T04:13:51.3899570Z   allow-unsafe-pr-checkout: false
+build	Checkout repository	2026-08-11T04:13:51.3964159Z ##[endgroup]
+build	Checkout repository	2026-08-11T04:13:51.5024088Z Syncing repository: liebertjohan-art/zenmath
+build	Checkout repository	2026-08-11T04:13:51.5026373Z ##[group]Getting Git version info
+build	Checkout repository	2026-08-11T04:13:51.5027602Z Working directory is '/home/runner/work/zenmath/zenmath'
+build	Checkout repository	2026-08-11T04:13:51.5029509Z [command]/usr/bin/git version
+build	Checkout repository	2026-08-11T04:13:51.5360361Z git version 2.54.0
+build	Checkout repository	2026-08-11T04:13:51.5390310Z ##[endgroup]
+build	Checkout repository	2026-08-11T04:13:51.5422281Z Temporarily overriding HOME='/home/runner/work/_temp/662b3f54-fa91-43e5-b85e-2a47f364f101' before making global git config changes
+build	Checkout repository	2026-08-11T04:13:51.5429407Z Adding repository directory to the temporary git global config as a safe directory
+build	Checkout repository	2026-08-11T04:13:51.5431367Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/zenmath/zenmath
+build	Checkout repository	2026-08-11T04:13:51.5522598Z Deleting the contents of '/home/runner/work/zenmath/zenmath'
+build	Checkout repository	2026-08-11T04:13:51.5524634Z ##[group]Initializing the repository
+build	Checkout repository	2026-08-11T04:13:51.5525973Z [command]/usr/bin/git init /home/runner/work/zenmath/zenmath
+build	Checkout repository	2026-08-11T04:13:51.6782730Z hint: Using 'master' as the name for the initial branch. This default branch name
+build	Checkout repository	2026-08-11T04:13:51.6786636Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+build	Checkout repository	2026-08-11T04:13:51.6788153Z hint: to use in all of your new repositories, which will suppress this warning,
+build	Checkout repository	2026-08-11T04:13:51.6789328Z hint: call:
+build	Checkout repository	2026-08-11T04:13:51.6790152Z hint:
+build	Checkout repository	2026-08-11T04:13:51.6791168Z hint: 	git config --global init.defaultBranch <name>
+build	Checkout repository	2026-08-11T04:13:51.6791989Z hint:
+build	Checkout repository	2026-08-11T04:13:51.6792782Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+build	Checkout repository	2026-08-11T04:13:51.6794024Z hint: 'development'. The just-created branch can be renamed via this command:
+build	Checkout repository	2026-08-11T04:13:51.6794930Z hint:
+build	Checkout repository	2026-08-11T04:13:51.6795532Z hint: 	git branch -m <name>
+build	Checkout repository	2026-08-11T04:13:51.6796136Z hint:
+build	Checkout repository	2026-08-11T04:13:51.6796968Z hint: Disable this message with "git config set advice.defaultBranchName false"
+build	Checkout repository	2026-08-11T04:13:51.6798153Z Initialized empty Git repository in /home/runner/work/zenmath/zenmath/.git/
+build	Checkout repository	2026-08-11T04:13:51.6803641Z [command]/usr/bin/git remote add origin https://github.com/liebertjohan-art/zenmath
+build	Checkout repository	2026-08-11T04:13:51.6885116Z ##[endgroup]
+build	Checkout repository	2026-08-11T04:13:51.6886091Z ##[group]Disabling automatic garbage collection
+build	Checkout repository	2026-08-11T04:13:51.6889872Z [command]/usr/bin/git config --local gc.auto 0
+build	Checkout repository	2026-08-11T04:13:51.6922512Z ##[endgroup]
+build	Checkout repository	2026-08-11T04:13:51.6923425Z ##[group]Setting up auth
+build	Checkout repository	2026-08-11T04:13:51.6929305Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+build	Checkout repository	2026-08-11T04:13:51.6965214Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+build	Checkout repository	2026-08-11T04:13:51.7311395Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+build	Checkout repository	2026-08-11T04:13:51.7346789Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+build	Checkout repository	2026-08-11T04:13:51.7569599Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+build	Checkout repository	2026-08-11T04:13:51.7605768Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+build	Checkout repository	2026-08-11T04:13:51.7826532Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+build	Checkout repository	2026-08-11T04:13:51.7864370Z ##[endgroup]
+build	Checkout repository	2026-08-11T04:13:51.7865184Z ##[group]Fetching the repository
+build	Checkout repository	2026-08-11T04:13:51.7873854Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +cacc5d227e3938c914455a3e12eb1a1fb453d972:refs/remotes/origin/main
+build	Checkout repository	2026-08-11T04:13:52.2657868Z From https://github.com/liebertjohan-art/zenmath
+build	Checkout repository	2026-08-11T04:13:52.2658895Z  * [new ref]         cacc5d227e3938c914455a3e12eb1a1fb453d972 -> origin/main
+build	Checkout repository	2026-08-11T04:13:52.2699459Z ##[endgroup]
+build	Checkout repository	2026-08-11T04:13:52.2700967Z ##[group]Determining the checkout info
+build	Checkout repository	2026-08-11T04:13:52.2710107Z ##[endgroup]
+build	Checkout repository	2026-08-11T04:13:52.2710951Z [command]/usr/bin/git sparse-checkout disable
+build	Checkout repository	2026-08-11T04:13:52.2749501Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+build	Checkout repository	2026-08-11T04:13:52.2781208Z ##[group]Checking out the ref
+build	Checkout repository	2026-08-11T04:13:52.2785673Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+build	Checkout repository	2026-08-11T04:13:52.2893166Z Switched to a new branch 'main'
+build	Checkout repository	2026-08-11T04:13:52.2895649Z branch 'main' set up to track 'origin/main'.
+build	Checkout repository	2026-08-11T04:13:52.2902078Z ##[endgroup]
+build	Checkout repository	2026-08-11T04:13:52.2943226Z [command]/usr/bin/git log -1 --format=%H
+build	Checkout repository	2026-08-11T04:13:52.2970265Z cacc5d227e3938c914455a3e12eb1a1fb453d972
+build	Set up Java	﻿2026-08-11T04:13:52.3278491Z ##[group]Run actions/setup-java@v5
+build	Set up Java	2026-08-11T04:13:52.3278922Z with:
+build	Set up Java	2026-08-11T04:13:52.3279221Z   distribution: zulu
+build	Set up Java	2026-08-11T04:13:52.3279530Z   java-version: 17
+build	Set up Java	2026-08-11T04:13:52.3279830Z   java-package: jdk
+build	Set up Java	2026-08-11T04:13:52.3280135Z   check-latest: false
+build	Set up Java	2026-08-11T04:13:52.3280439Z   set-default: true
+build	Set up Java	2026-08-11T04:13:52.3281064Z   verify-signature: false
+build	Set up Java	2026-08-11T04:13:52.3281402Z   server-id: github
+build	Set up Java	2026-08-11T04:13:52.3281713Z   server-username: GITHUB_ACTOR
+build	Set up Java	2026-08-11T04:13:52.3282072Z   server-password: GITHUB_TOKEN
+build	Set up Java	2026-08-11T04:13:52.3282425Z   overwrite-settings: true
+build	Set up Java	2026-08-11T04:13:52.3282756Z   job-status: success
+build	Set up Java	2026-08-11T04:13:52.3285423Z   token: ***
+build	Set up Java	2026-08-11T04:13:52.3285738Z   show-download-progress: false
+build	Set up Java	2026-08-11T04:13:52.3286109Z ##[endgroup]
+build	Set up Java	2026-08-11T04:13:52.4752399Z ##[group]Installed distributions
+build	Set up Java	2026-08-11T04:13:52.4781021Z Trying to resolve the latest version from remote
+build	Set up Java	2026-08-11T04:13:52.5950937Z Resolved latest version as 17.0.20+8
+build	Set up Java	2026-08-11T04:13:52.5952229Z Trying to download...
+build	Set up Java	2026-08-11T04:13:52.5952942Z Downloading Java 17.0.20+8 (Zulu) from https://cdn.azul.com/zulu/bin/zulu17.68.17-ca-jdk17.0.20-linux_x64.tar.gz ...
+build	Set up Java	2026-08-11T04:13:55.7821564Z Extracting Java archive...
+build	Set up Java	2026-08-11T04:13:55.7947236Z [command]/usr/bin/tar xz --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/ea3bea26-5bc2-4aa8-a140-5af3ad0d27e2 -f /home/runner/work/_temp/369fdc68-119d-4c30-8fbe-2570368d7d34
+build	Set up Java	2026-08-11T04:13:58.2890336Z Java 17.0.20+8 was downloaded
+build	Set up Java	2026-08-11T04:13:58.2891350Z Setting Java 17.0.20+8 as the default
+build	Set up Java	2026-08-11T04:13:58.2921586Z Creating toolchains.xml for JDK version 17 from zulu
+build	Set up Java	2026-08-11T04:13:58.3014617Z Writing to /home/runner/.m2/toolchains.xml
+build	Set up Java	2026-08-11T04:13:58.3015250Z 
+build	Set up Java	2026-08-11T04:13:58.3025207Z Java configuration:
+build	Set up Java	2026-08-11T04:13:58.3025825Z   Distribution: zulu
+build	Set up Java	2026-08-11T04:13:58.3026343Z   Version: 17.0.20+8
+build	Set up Java	2026-08-11T04:13:58.3026719Z   Path: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.20-8/x64
+build	Set up Java	2026-08-11T04:13:58.3027121Z 
+build	Set up Java	2026-08-11T04:13:58.3027710Z ##[endgroup]
+build	Set up Java	2026-08-11T04:13:58.3057688Z Creating settings.xml with server-id: github
+build	Set up Java	2026-08-11T04:13:58.3058162Z Writing to /home/runner/.m2/settings.xml
+build	Set up Java	2026-08-11T04:13:58.3058971Z Configured MAVEN_ARGS to include -ntp to suppress Maven transfer progress logs. Set 'show-download-progress: true' to keep the download progress output.
+build	Cache Gradle dependencies	﻿2026-08-11T04:13:58.4204231Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+build	Cache Gradle dependencies	2026-08-11T04:13:58.4205564Z ##[group]Run actions/cache@v4
+build	Cache Gradle dependencies	2026-08-11T04:13:58.4205807Z with:
+build	Cache Gradle dependencies	2026-08-11T04:13:58.4206019Z   path: ~/.gradle/caches
+build	Cache Gradle dependencies	~/.gradle/wrapper
+build	Cache Gradle dependencies	
+build	Cache Gradle dependencies	2026-08-11T04:13:58.4206475Z   key: Linux-gradle-bd7874eb85c64eaa44b4cd0c8340033ae30d54fa0e4e5d74831addf6abc34e2e
+build	Cache Gradle dependencies	2026-08-11T04:13:58.4206924Z   restore-keys: Linux-gradle-
+build	Cache Gradle dependencies	
+build	Cache Gradle dependencies	2026-08-11T04:13:58.4207192Z   enableCrossOsArchive: false
+build	Cache Gradle dependencies	2026-08-11T04:13:58.4207430Z   fail-on-cache-miss: false
+build	Cache Gradle dependencies	2026-08-11T04:13:58.4207653Z   lookup-only: false
+build	Cache Gradle dependencies	2026-08-11T04:13:58.4207853Z   save-always: false
+build	Cache Gradle dependencies	2026-08-11T04:13:58.4208054Z env:
+build	Cache Gradle dependencies	2026-08-11T04:13:58.4208310Z   JAVA_HOME: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.20-8/x64
+build	Cache Gradle dependencies	2026-08-11T04:13:58.4208752Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.20-8/x64
+build	Cache Gradle dependencies	2026-08-11T04:13:58.4209119Z   MAVEN_ARGS: -ntp
+build	Cache Gradle dependencies	2026-08-11T04:13:58.4209323Z ##[endgroup]
+build	Cache Gradle dependencies	2026-08-11T04:13:58.5241279Z (node:2256) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+build	Cache Gradle dependencies	2026-08-11T04:13:58.5242498Z (Use `node --trace-deprecation ...` to show where the warning was created)
+build	Cache Gradle dependencies	2026-08-11T04:13:58.8169238Z Cache hit for: Linux-gradle-bd7874eb85c64eaa44b4cd0c8340033ae30d54fa0e4e5d74831addf6abc34e2e
+build	Cache Gradle dependencies	2026-08-11T04:13:58.8325315Z (node:2256) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+build	Cache Gradle dependencies	2026-08-11T04:14:00.1191729Z Received 0 of 1310090930 (0.0%), 0.0 MBs/sec
+build	Cache Gradle dependencies	2026-08-11T04:14:01.1190502Z Received 75497472 of 1310090930 (5.8%), 36.0 MBs/sec
+build	Cache Gradle dependencies	2026-08-11T04:14:02.1188268Z Received 192937984 of 1310090930 (14.7%), 61.3 MBs/sec
+build	Cache Gradle dependencies	2026-08-11T04:14:03.1188203Z Received 264241152 of 1310090930 (20.2%), 63.0 MBs/sec
+build	Cache Gradle dependencies	2026-08-11T04:14:04.1187727Z Received 369098752 of 1310090930 (28.2%), 70.4 MBs/sec
+build	Cache Gradle dependencies	2026-08-11T04:14:05.1184728Z Received 398458880 of 1310090930 (30.4%), 63.3 MBs/sec
+build	Cache Gradle dependencies	2026-08-11T04:14:06.1214796Z Received 490733568 of 1310090930 (37.5%), 66.8 MBs/sec
+build	Cache Gradle dependencies	2026-08-11T04:14:07.1238336Z Received 595591168 of 1310090930 (45.5%), 71.0 MBs/sec
+build	Cache Gradle dependencies	2026-08-11T04:14:08.1238283Z Received 713031680 of 1310090930 (54.4%), 75.5 MBs/sec
+build	Cache Gradle dependencies	2026-08-11T04:14:09.1239219Z Received 838860800 of 1310090930 (64.0%), 80.0 MBs/sec
+build	Cache Gradle dependencies	2026-08-11T04:14:10.1242671Z Received 964689920 of 1310090930 (73.6%), 83.6 MBs/sec
+build	Cache Gradle dependencies	2026-08-11T04:14:11.1255861Z Received 1073741824 of 1310090930 (82.0%), 85.3 MBs/sec
+build	Cache Gradle dependencies	2026-08-11T04:14:12.1281890Z Received 1182793728 of 1310090930 (90.3%), 86.7 MBs/sec
+build	Cache Gradle dependencies	2026-08-11T04:14:13.1266637Z Received 1287651328 of 1310090930 (98.3%), 87.7 MBs/sec
+build	Cache Gradle dependencies	2026-08-11T04:14:13.2612782Z Received 1310090930 of 1310090930 (100.0%), 88.3 MBs/sec
+build	Cache Gradle dependencies	2026-08-11T04:14:13.2614785Z Cache Size: ~1249 MB (1310090930 B)
+build	Cache Gradle dependencies	2026-08-11T04:14:13.2661309Z [command]/usr/bin/tar -xf /home/runner/work/_temp/c6f6263e-560a-4533-aa61-442964bd2fa7/cache.tzst -P -C /home/runner/work/zenmath/zenmath --use-compress-program unzstd
+build	Cache Gradle dependencies	2026-08-11T04:14:19.9790644Z Cache restored successfully
+build	Cache Gradle dependencies	2026-08-11T04:14:20.1810982Z Cache restored from key: Linux-gradle-bd7874eb85c64eaa44b4cd0c8340033ae30d54fa0e4e5d74831addf6abc34e2e
+build	Set up Flutter	﻿2026-08-11T04:14:20.2100289Z ##[group]Run subosito/flutter-action@v2
+build	Set up Flutter	2026-08-11T04:14:20.2100949Z with:
+build	Set up Flutter	2026-08-11T04:14:20.2101183Z   flutter-version: 3.44.0
+build	Set up Flutter	2026-08-11T04:14:20.2101406Z   channel: stable
+build	Set up Flutter	2026-08-11T04:14:20.2101595Z   cache: true
+build	Set up Flutter	2026-08-11T04:14:20.2101773Z   architecture: X64
+build	Set up Flutter	2026-08-11T04:14:20.2101988Z   pub-cache-path: default
+build	Set up Flutter	2026-08-11T04:14:20.2102208Z   dry-run: false
+build	Set up Flutter	2026-08-11T04:14:20.2102487Z   git-source: https://github.com/flutter/flutter.git
+build	Set up Flutter	2026-08-11T04:14:20.2102789Z env:
+build	Set up Flutter	2026-08-11T04:14:20.2103054Z   JAVA_HOME: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.20-8/x64
+build	Set up Flutter	2026-08-11T04:14:20.2103463Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.20-8/x64
+build	Set up Flutter	2026-08-11T04:14:20.2103797Z   MAVEN_ARGS: -ntp
+build	Set up Flutter	2026-08-11T04:14:20.2103990Z ##[endgroup]
+build	Set up Flutter	2026-08-11T04:14:20.2161585Z ##[start-action display=Make yq tool available on Windows runners;id=__subosito_flutter-action.__run]
+build	Set up Flutter	2026-08-11T04:14:20.2172740Z ##[end-action id=__subosito_flutter-action.__run;outcome=skipped;conclusion=skipped;duration_ms=0]
+build	Set up Flutter	2026-08-11T04:14:20.2174824Z ##[start-action display=Make setup script executable;id=__subosito_flutter-action.__run_2]
+build	Set up Flutter	2026-08-11T04:14:20.2208308Z ##[group]Run chmod +x "$GITHUB_ACTION_PATH/setup.sh"
+build	Set up Flutter	2026-08-11T04:14:20.2208719Z [36;1mchmod +x "$GITHUB_ACTION_PATH/setup.sh"[0m
+build	Set up Flutter	2026-08-11T04:14:20.2257004Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+build	Set up Flutter	2026-08-11T04:14:20.2257368Z env:
+build	Set up Flutter	2026-08-11T04:14:20.2257638Z   JAVA_HOME: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.20-8/x64
+build	Set up Flutter	2026-08-11T04:14:20.2258059Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.20-8/x64
+build	Set up Flutter	2026-08-11T04:14:20.2258391Z   MAVEN_ARGS: -ntp
+build	Set up Flutter	2026-08-11T04:14:20.2258592Z ##[endgroup]
+build	Set up Flutter	2026-08-11T04:14:20.3337046Z ##[end-action id=__subosito_flutter-action.__run_2;outcome=success;conclusion=success;duration_ms=116]
+build	Set up Flutter	2026-08-11T04:14:20.3340840Z ##[start-action display=Set action inputs;id=__subosito_flutter-action.flutter-action]
+build	Set up Flutter	2026-08-11T04:14:20.3361935Z ##[group]Run $GITHUB_ACTION_PATH/setup.sh -p \
+build	Set up Flutter	2026-08-11T04:14:20.3362334Z [36;1m$GITHUB_ACTION_PATH/setup.sh -p \[0m
+build	Set up Flutter	2026-08-11T04:14:20.3362630Z [36;1m  -n '3.44.0' \[0m
+build	Set up Flutter	2026-08-11T04:14:20.3362846Z [36;1m  -f '' \[0m
+build	Set up Flutter	2026-08-11T04:14:20.3363040Z [36;1m  -a 'X64' \[0m
+build	Set up Flutter	2026-08-11T04:14:20.3363382Z [36;1m  -k '' \[0m
+build	Set up Flutter	2026-08-11T04:14:20.3363596Z [36;1m  -c '' \[0m
+build	Set up Flutter	2026-08-11T04:14:20.3363790Z [36;1m  -l '' \[0m
+build	Set up Flutter	2026-08-11T04:14:20.3363988Z [36;1m  -d 'default' \[0m
+build	Set up Flutter	2026-08-11T04:14:20.3364291Z [36;1m  -g 'https://github.com/flutter/flutter.git' \[0m
+build	Set up Flutter	2026-08-11T04:14:20.3364611Z [36;1m  stable[0m
+build	Set up Flutter	2026-08-11T04:14:20.3412204Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+build	Set up Flutter	2026-08-11T04:14:20.3412547Z env:
+build	Set up Flutter	2026-08-11T04:14:20.3412806Z   JAVA_HOME: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.20-8/x64
+build	Set up Flutter	2026-08-11T04:14:20.3413213Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.20-8/x64
+build	Set up Flutter	2026-08-11T04:14:20.3413554Z   MAVEN_ARGS: -ntp
+build	Set up Flutter	2026-08-11T04:14:20.3413757Z ##[endgroup]
+build	Set up Flutter	2026-08-11T04:14:20.7717387Z ##[end-action id=__subosito_flutter-action.flutter-action;outcome=success;conclusion=success;duration_ms=437]
+build	Set up Flutter	2026-08-11T04:14:20.7724312Z ##[start-action display=Cache Flutter;id=__subosito_flutter-action.cache-flutter]
+build	Set up Flutter	2026-08-11T04:14:20.7767401Z ##[group]Run actions/cache@v5
+build	Set up Flutter	2026-08-11T04:14:20.7767650Z with:
+build	Set up Flutter	2026-08-11T04:14:20.7767898Z   path: /opt/hostedtoolcache/flutter/stable-3.44.0-x64
+build	Set up Flutter	2026-08-11T04:14:20.7768356Z   key: flutter-linux-stable-3.44.0-x64-559ffa3f75e7402d65a8def9c28389a9b2e6fe42
+build	Set up Flutter	2026-08-11T04:14:20.7768779Z   enableCrossOsArchive: false
+build	Set up Flutter	2026-08-11T04:14:20.7769026Z   fail-on-cache-miss: false
+build	Set up Flutter	2026-08-11T04:14:20.7769250Z   lookup-only: false
+build	Set up Flutter	2026-08-11T04:14:20.7769453Z   save-always: false
+build	Set up Flutter	2026-08-11T04:14:20.7769701Z env:
+build	Set up Flutter	2026-08-11T04:14:20.7769942Z   JAVA_HOME: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.20-8/x64
+build	Set up Flutter	2026-08-11T04:14:20.7770337Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.20-8/x64
+build	Set up Flutter	2026-08-11T04:14:20.7770972Z   MAVEN_ARGS: -ntp
+build	Set up Flutter	2026-08-11T04:14:20.7771178Z ##[endgroup]
+build	Set up Flutter	2026-08-11T04:14:21.1720452Z Cache hit for: flutter-linux-stable-3.44.0-x64-559ffa3f75e7402d65a8def9c28389a9b2e6fe42
+build	Set up Flutter	2026-08-11T04:14:22.4690014Z Received 0 of 1687269053 (0.0%), 0.0 MBs/sec
+build	Set up Flutter	2026-08-11T04:14:23.4698645Z Received 100663296 of 1687269053 (6.0%), 48.0 MBs/sec
+build	Set up Flutter	2026-08-11T04:14:24.4741773Z Received 251658240 of 1687269053 (14.9%), 79.9 MBs/sec
+build	Set up Flutter	2026-08-11T04:14:25.4938589Z Received 402653184 of 1687269053 (23.9%), 95.4 MBs/sec
+build	Set up Flutter	2026-08-11T04:14:26.4940501Z Received 557842432 of 1687269053 (33.1%), 105.9 MBs/sec
+build	Set up Flutter	2026-08-11T04:14:27.4944990Z Received 721420288 of 1687269053 (42.8%), 114.2 MBs/sec
+build	Set up Flutter	2026-08-11T04:14:28.5001458Z Received 914358272 of 1687269053 (54.2%), 124.1 MBs/sec
+build	Set up Flutter	2026-08-11T04:14:29.4961137Z Received 1073741824 of 1687269053 (63.6%), 127.6 MBs/sec
+build	Set up Flutter	2026-08-11T04:14:30.4956625Z Received 1249902592 of 1687269053 (74.1%), 132.0 MBs/sec
+build	Set up Flutter	2026-08-11T04:14:31.4961799Z Received 1421869056 of 1687269053 (84.3%), 135.2 MBs/sec
+build	Set up Flutter	2026-08-11T04:14:32.4969034Z Received 1589641216 of 1687269053 (94.2%), 137.5 MBs/sec
+build	Set up Flutter	2026-08-11T04:14:33.2268532Z Received 1687269053 of 1687269053 (100.0%), 136.9 MBs/sec
+build	Set up Flutter	2026-08-11T04:14:33.2271618Z Cache Size: ~1609 MB (1687269053 B)
+build	Set up Flutter	2026-08-11T04:14:33.2339583Z [command]/usr/bin/tar -xf /home/runner/work/_temp/dc677171-5df3-4fce-9415-47df73fba9d9/cache.tzst -P -C /home/runner/work/zenmath/zenmath --use-compress-program unzstd
+build	Set up Flutter	2026-08-11T04:14:37.9227140Z Cache restored successfully
+build	Set up Flutter	2026-08-11T04:14:38.0014979Z Cache restored from key: flutter-linux-stable-3.44.0-x64-559ffa3f75e7402d65a8def9c28389a9b2e6fe42
+build	Set up Flutter	2026-08-11T04:14:38.0142311Z ##[end-action id=__subosito_flutter-action.cache-flutter;outcome=success;conclusion=success;duration_ms=17241]
+build	Set up Flutter	2026-08-11T04:14:38.0144907Z ##[start-action display=Cache pub dependencies;id=__subosito_flutter-action.cache-pub]
+build	Set up Flutter	2026-08-11T04:14:38.0977425Z ##[group]Run actions/cache@v5
+build	Set up Flutter	2026-08-11T04:14:38.0977685Z with:
+build	Set up Flutter	2026-08-11T04:14:38.0978055Z   path: /home/runner/.pub-cache
+build	Set up Flutter	2026-08-11T04:14:38.0978493Z   key: flutter-pub-linux-stable-3.44.0-x64-559ffa3f75e7402d65a8def9c28389a9b2e6fe42-
+build	Set up Flutter	2026-08-11T04:14:38.0978960Z   enableCrossOsArchive: false
+build	Set up Flutter	2026-08-11T04:14:38.0979211Z   fail-on-cache-miss: false
+build	Set up Flutter	2026-08-11T04:14:38.0979442Z   lookup-only: false
+build	Set up Flutter	2026-08-11T04:14:38.0979646Z   save-always: false
+build	Set up Flutter	2026-08-11T04:14:38.0979844Z env:
+build	Set up Flutter	2026-08-11T04:14:38.0980090Z   JAVA_HOME: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.20-8/x64
+build	Set up Flutter	2026-08-11T04:14:38.0980495Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.20-8/x64
+build	Set up Flutter	2026-08-11T04:14:38.0981087Z   MAVEN_ARGS: -ntp
+build	Set up Flutter	2026-08-11T04:14:38.0981301Z ##[endgroup]
+build	Set up Flutter	2026-08-11T04:14:38.4774717Z Cache hit for: flutter-pub-linux-stable-3.44.0-x64-559ffa3f75e7402d65a8def9c28389a9b2e6fe42-
+build	Set up Flutter	2026-08-11T04:14:39.7667677Z Received 0 of 28673229 (0.0%), 0.0 MBs/sec
+build	Set up Flutter	2026-08-11T04:14:40.1749984Z Received 28673229 of 28673229 (100.0%), 19.4 MBs/sec
+build	Set up Flutter	2026-08-11T04:14:40.1750946Z Cache Size: ~27 MB (28673229 B)
+build	Set up Flutter	2026-08-11T04:14:40.1780753Z [command]/usr/bin/tar -xf /home/runner/work/_temp/264a9681-9e48-47e2-b1f0-20f5b8d40afd/cache.tzst -P -C /home/runner/work/zenmath/zenmath --use-compress-program unzstd
+build	Set up Flutter	2026-08-11T04:14:40.7765025Z Cache restored successfully
+build	Set up Flutter	2026-08-11T04:14:40.7860331Z Cache restored from key: flutter-pub-linux-stable-3.44.0-x64-559ffa3f75e7402d65a8def9c28389a9b2e6fe42-
+build	Set up Flutter	2026-08-11T04:14:40.7945348Z ##[end-action id=__subosito_flutter-action.cache-pub;outcome=success;conclusion=success;duration_ms=2779]
+build	Set up Flutter	2026-08-11T04:14:40.7949490Z ##[start-action display=Run setup script;id=__subosito_flutter-action.__run_3]
+build	Set up Flutter	2026-08-11T04:14:40.7984644Z ##[group]Run $GITHUB_ACTION_PATH/setup.sh \
+build	Set up Flutter	2026-08-11T04:14:40.7985015Z [36;1m$GITHUB_ACTION_PATH/setup.sh \[0m
+build	Set up Flutter	2026-08-11T04:14:40.7985297Z [36;1m  -n '3.44.0' \[0m
+build	Set up Flutter	2026-08-11T04:14:40.7985532Z [36;1m  -a 'x64' \[0m
+build	Set up Flutter	2026-08-11T04:14:40.7985860Z [36;1m  -c '/opt/hostedtoolcache/flutter/stable-3.44.0-x64' \[0m
+build	Set up Flutter	2026-08-11T04:14:40.7986232Z [36;1m  -d '/home/runner/.pub-cache' \[0m
+build	Set up Flutter	2026-08-11T04:14:40.7986532Z [36;1m  stable[0m
+build	Set up Flutter	2026-08-11T04:14:40.8030366Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+build	Set up Flutter	2026-08-11T04:14:40.8031197Z env:
+build	Set up Flutter	2026-08-11T04:14:40.8031471Z   JAVA_HOME: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.20-8/x64
+build	Set up Flutter	2026-08-11T04:14:40.8031908Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.20-8/x64
+build	Set up Flutter	2026-08-11T04:14:40.8032257Z   MAVEN_ARGS: -ntp
+build	Set up Flutter	2026-08-11T04:14:40.8032474Z ##[endgroup]
+build	Set up Flutter	2026-08-11T04:14:40.9810241Z ##[end-action id=__subosito_flutter-action.__run_3;outcome=success;conclusion=success;duration_ms=185]
+build	Install dependencies	﻿2026-08-11T04:14:40.9884432Z ##[group]Run flutter pub get
+build	Install dependencies	2026-08-11T04:14:40.9884759Z [36;1mflutter pub get[0m
+build	Install dependencies	2026-08-11T04:14:40.9929447Z shell: /usr/bin/bash -e {0}
+build	Install dependencies	2026-08-11T04:14:40.9929716Z env:
+build	Install dependencies	2026-08-11T04:14:40.9929987Z   JAVA_HOME: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.20-8/x64
+build	Install dependencies	2026-08-11T04:14:40.9930434Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.20-8/x64
+build	Install dependencies	2026-08-11T04:14:40.9931069Z   MAVEN_ARGS: -ntp
+build	Install dependencies	2026-08-11T04:14:40.9931395Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.44.0-x64/flutter
+build	Install dependencies	2026-08-11T04:14:40.9931769Z   PUB_CACHE: /home/runner/.pub-cache
+build	Install dependencies	2026-08-11T04:14:40.9932028Z ##[endgroup]
+build	Install dependencies	2026-08-11T04:14:41.3413341Z Resolving dependencies...
+build	Install dependencies	2026-08-11T04:14:41.9125151Z Downloading packages...
+build	Install dependencies	2026-08-11T04:14:46.1968090Z + _fe_analyzer_shared 61.0.0 (105.0.0 available)
+build	Install dependencies	2026-08-11T04:14:46.1968840Z + analyzer 5.13.0 (14.1.0 available)
+build	Install dependencies	2026-08-11T04:14:46.1969372Z + args 2.7.0
+build	Install dependencies	2026-08-11T04:14:46.1969765Z + async 2.13.1
+build	Install dependencies	2026-08-11T04:14:46.1970190Z + boolean_selector 2.1.2
+build	Install dependencies	2026-08-11T04:14:46.1971095Z + build 2.4.1 (4.0.10 available)
+build	Install dependencies	2026-08-11T04:14:46.1971632Z + build_config 1.1.2 (1.3.2 available)
+build	Install dependencies	2026-08-11T04:14:46.1972189Z + build_daemon 4.1.5
+build	Install dependencies	2026-08-11T04:14:46.1972644Z + build_resolvers 2.4.2 (3.0.4 available)
+build	Install dependencies	2026-08-11T04:14:46.1973234Z + build_runner 2.4.13 (2.16.0 available)
+build	Install dependencies	2026-08-11T04:14:46.1973756Z + build_runner_core 7.3.2 (9.3.2 available)
+build	Install dependencies	2026-08-11T04:14:46.1974547Z + built_collection 5.1.1
+build	Install dependencies	2026-08-11T04:14:46.1974943Z + built_value 8.12.7
+build	Install dependencies	2026-08-11T04:14:46.1975309Z + characters 1.4.1
+build	Install dependencies	2026-08-11T04:14:46.1975649Z + checked_yaml 2.0.4
+build	Install dependencies	2026-08-11T04:14:46.1975990Z + clock 1.1.2
+build	Install dependencies	2026-08-11T04:14:46.1976309Z + code_assets 1.2.1
+build	Install dependencies	2026-08-11T04:14:46.1976641Z + code_builder 4.11.1
+build	Install dependencies	2026-08-11T04:14:46.1976999Z + collection 1.19.1
+build	Install dependencies	2026-08-11T04:14:46.1977336Z + convert 3.1.2
+build	Install dependencies	2026-08-11T04:14:46.1977660Z + crypto 3.0.7
+build	Install dependencies	2026-08-11T04:14:46.1977996Z + cupertino_icons 1.0.9
+build	Install dependencies	2026-08-11T04:14:46.1978409Z + dart_style 2.3.2 (3.1.12 available)
+build	Install dependencies	2026-08-11T04:14:46.1978870Z + dartx 1.2.0
+build	Install dependencies	2026-08-11T04:14:46.1979225Z + equatable 2.1.0
+build	Install dependencies	2026-08-11T04:14:46.1979588Z + fake_async 1.3.3
+build	Install dependencies	2026-08-11T04:14:46.1979927Z + ffi 2.2.0
+build	Install dependencies	2026-08-11T04:14:46.1980251Z + file 7.0.1
+build	Install dependencies	2026-08-11T04:14:46.1980814Z + fixnum 1.1.1
+build	Install dependencies	2026-08-11T04:14:46.1981190Z + fl_chart 0.69.2 (1.2.0 available)
+build	Install dependencies	2026-08-11T04:14:46.1981674Z + flutter 0.0.0 from sdk flutter
+build	Install dependencies	2026-08-11T04:14:46.1982151Z + flutter_lints 5.0.0 (6.0.0 available)
+build	Install dependencies	2026-08-11T04:14:46.1982662Z + flutter_riverpod 2.6.1 (3.4.2 available)
+build	Install dependencies	2026-08-11T04:14:46.1983168Z + flutter_test 0.0.0 from sdk flutter
+build	Install dependencies	2026-08-11T04:14:46.1983679Z + flutter_web_plugins 0.0.0 from sdk flutter
+build	Install dependencies	2026-08-11T04:14:46.1984216Z + frontend_server_client 4.0.0
+build	Install dependencies	2026-08-11T04:14:46.1984680Z + glob 2.1.3
+build	Install dependencies	2026-08-11T04:14:46.1985045Z + go_router 14.8.1 (17.5.0 available)
+build	Install dependencies	2026-08-11T04:14:46.1985535Z + google_fonts 6.3.3 (8.2.1 available)
+build	Install dependencies	2026-08-11T04:14:46.1985994Z + graphs 2.3.2
+build	Install dependencies	2026-08-11T04:14:46.1986359Z + hooks 2.0.2 (2.1.0 available)
+build	Install dependencies	2026-08-11T04:14:46.1986775Z + http 1.6.0
+build	Install dependencies	2026-08-11T04:14:46.1987140Z + http_multi_server 3.2.2
+build	Install dependencies	2026-08-11T04:14:46.1987556Z + http_parser 4.1.2
+build	Install dependencies	2026-08-11T04:14:46.1987912Z + io 1.0.5
+build	Install dependencies	2026-08-11T04:14:46.1988239Z + isar 3.1.0+1
+build	Install dependencies	2026-08-11T04:14:46.1988594Z + isar_flutter_libs 3.1.0+1
+build	Install dependencies	2026-08-11T04:14:46.1989024Z + isar_generator 3.1.0+1
+build	Install dependencies	2026-08-11T04:14:46.1989409Z + jni 1.0.3
+build	Install dependencies	2026-08-11T04:14:46.1989736Z + jni_flutter 1.0.2
+build	Install dependencies	2026-08-11T04:14:46.1990110Z + jni_util 1.0.0
+build	Install dependencies	2026-08-11T04:14:46.1990472Z + js 0.6.7 (0.7.2 available)
+build	Install dependencies	2026-08-11T04:14:46.1991111Z + json_annotation 4.12.0
+build	Install dependencies	2026-08-11T04:14:46.1991516Z + leak_tracker 11.0.2
+build	Install dependencies	2026-08-11T04:14:46.1991930Z + leak_tracker_flutter_testing 3.0.10
+build	Install dependencies	2026-08-11T04:14:46.1992412Z + leak_tracker_testing 3.0.2
+build	Install dependencies	2026-08-11T04:14:46.1992839Z + lints 5.1.1 (6.1.0 available)
+build	Install dependencies	2026-08-11T04:14:46.1993268Z + logging 1.3.0
+build	Install dependencies	2026-08-11T04:14:46.1993620Z + matcher 0.12.19 (0.12.20 available)
+build	Install dependencies	2026-08-11T04:14:46.1994134Z + material_color_utilities 0.13.0 (0.13.1 available)
+build	Install dependencies	2026-08-11T04:14:46.1994653Z + meta 1.18.0 (1.19.0 available)
+build	Install dependencies	2026-08-11T04:14:46.1995364Z + mime 2.0.0
+build	Install dependencies	2026-08-11T04:14:46.1995687Z + objective_c 9.5.0
+build	Install dependencies	2026-08-11T04:14:46.1996065Z + package_config 2.2.0 (3.0.0 available)
+build	Install dependencies	2026-08-11T04:14:46.1996527Z + path 1.9.1
+build	Install dependencies	2026-08-11T04:14:46.1996918Z + path_provider 2.1.6
+build	Install dependencies	2026-08-11T04:14:46.1997343Z + path_provider_android 2.3.1
+build	Install dependencies	2026-08-11T04:14:46.1997811Z + path_provider_foundation 2.6.0
+build	Install dependencies	2026-08-11T04:14:46.1998449Z + path_provider_linux 2.2.2
+build	Install dependencies	2026-08-11T04:14:46.1998915Z + path_provider_platform_interface 2.1.3
+build	Install dependencies	2026-08-11T04:14:46.1999433Z + path_provider_windows 2.3.0
+build	Install dependencies	2026-08-11T04:14:46.1999869Z + platform 3.1.6
+build	Install dependencies	2026-08-11T04:14:46.2000266Z + plugin_platform_interface 2.1.8
+build	Install dependencies	2026-08-11T04:14:46.2000963Z + pool 1.5.2
+build	Install dependencies	2026-08-11T04:14:46.2001321Z + pub_semver 2.2.0
+build	Install dependencies	2026-08-11T04:14:46.2001704Z + pubspec_parse 1.5.0
+build	Install dependencies	2026-08-11T04:14:46.2002107Z + record_use 0.6.0 (1.1.0 available)
+build	Install dependencies	2026-08-11T04:14:46.2002598Z + riverpod 2.6.1 (3.4.2 available)
+build	Install dependencies	2026-08-11T04:14:46.2003092Z + shared_preferences 2.5.5
+build	Install dependencies	2026-08-11T04:14:46.2003545Z + shared_preferences_android 2.4.27
+build	Install dependencies	2026-08-11T04:14:46.2004045Z + shared_preferences_foundation 2.5.6
+build	Install dependencies	2026-08-11T04:14:46.2004552Z + shared_preferences_linux 2.4.1
+build	Install dependencies	2026-08-11T04:14:46.2005067Z + shared_preferences_platform_interface 2.4.2
+build	Install dependencies	2026-08-11T04:14:46.2005602Z + shared_preferences_web 2.4.3
+build	Install dependencies	2026-08-11T04:14:46.2006074Z + shared_preferences_windows 2.4.1
+build	Install dependencies	2026-08-11T04:14:46.2006776Z + shelf 1.4.2
+build	Install dependencies	2026-08-11T04:14:46.2007169Z + shelf_web_socket 2.0.1 (3.0.0 available)
+build	Install dependencies	2026-08-11T04:14:46.2007676Z + sky_engine 0.0.0 from sdk flutter
+build	Install dependencies	2026-08-11T04:14:46.2008143Z + source_gen 1.5.0 (4.2.4 available)
+build	Install dependencies	2026-08-11T04:14:46.2008606Z + source_span 1.10.2
+build	Install dependencies	2026-08-11T04:14:46.2008987Z + stack_trace 1.12.1
+build	Install dependencies	2026-08-11T04:14:46.2009379Z + state_notifier 1.0.0
+build	Install dependencies	2026-08-11T04:14:46.2009781Z + stream_channel 2.1.4
+build	Install dependencies	2026-08-11T04:14:46.2010184Z + stream_transform 2.1.1
+build	Install dependencies	2026-08-11T04:14:46.2010853Z + string_scanner 1.4.1
+build	Install dependencies	2026-08-11T04:14:46.2011280Z + term_glyph 1.2.2
+build	Install dependencies	2026-08-11T04:14:46.2011677Z + test_api 0.7.11 (0.7.13 available)
+build	Install dependencies	2026-08-11T04:14:46.2012127Z + time 2.1.6
+build	Install dependencies	2026-08-11T04:14:46.2012469Z + timing 1.0.2
+build	Install dependencies	2026-08-11T04:14:46.2012823Z + typed_data 1.4.0
+build	Install dependencies	2026-08-11T04:14:46.2013221Z + vector_math 2.2.0 (2.4.2 available)
+build	Install dependencies	2026-08-11T04:14:46.2013683Z + vm_service 15.2.0
+build	Install dependencies	2026-08-11T04:14:46.2014048Z + watcher 1.2.1
+build	Install dependencies	2026-08-11T04:14:46.2014404Z + web 1.1.1
+build	Install dependencies	2026-08-11T04:14:46.2014747Z + web_socket 1.0.1
+build	Install dependencies	2026-08-11T04:14:46.2015131Z + web_socket_channel 3.0.3
+build	Install dependencies	2026-08-11T04:14:46.2015553Z + xdg_directories 1.1.0
+build	Install dependencies	2026-08-11T04:14:46.2015939Z + xxh3 1.2.0
+build	Install dependencies	2026-08-11T04:14:46.2016279Z + yaml 3.1.3
+build	Install dependencies	2026-08-11T04:14:46.2016670Z Changed 109 dependencies!
+build	Install dependencies	2026-08-11T04:14:46.2017304Z 26 packages have newer versions incompatible with dependency constraints.
+build	Install dependencies	2026-08-11T04:14:46.2018060Z Try `flutter pub outdated` for more information.
+build	Run build_runner (Code Generation)	﻿2026-08-11T04:14:46.4947393Z ##[group]Run flutter pub run build_runner build --delete-conflicting-outputs
+build	Run build_runner (Code Generation)	2026-08-11T04:14:46.4948435Z [36;1mflutter pub run build_runner build --delete-conflicting-outputs[0m
+build	Run build_runner (Code Generation)	2026-08-11T04:14:46.5004875Z shell: /usr/bin/bash -e {0}
+build	Run build_runner (Code Generation)	2026-08-11T04:14:46.5005159Z env:
+build	Run build_runner (Code Generation)	2026-08-11T04:14:46.5005444Z   JAVA_HOME: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.20-8/x64
+build	Run build_runner (Code Generation)	2026-08-11T04:14:46.5005886Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.20-8/x64
+build	Run build_runner (Code Generation)	2026-08-11T04:14:46.5006248Z   MAVEN_ARGS: -ntp
+build	Run build_runner (Code Generation)	2026-08-11T04:14:46.5006588Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.44.0-x64/flutter
+build	Run build_runner (Code Generation)	2026-08-11T04:14:46.5006971Z   PUB_CACHE: /home/runner/.pub-cache
+build	Run build_runner (Code Generation)	2026-08-11T04:14:46.5007228Z ##[endgroup]
+build	Run build_runner (Code Generation)	2026-08-11T04:14:51.0579852Z [INFO] Generating build script...
+build	Run build_runner (Code Generation)	2026-08-11T04:14:51.3396990Z [INFO] Generating build script completed, took 292ms
+build	Run build_runner (Code Generation)	2026-08-11T04:14:51.3397478Z 
+build	Run build_runner (Code Generation)	2026-08-11T04:14:51.3797430Z [INFO] Precompiling build script......
+build	Run build_runner (Code Generation)	2026-08-11T04:14:55.6042299Z [INFO] Precompiling build script... completed, took 4.2s
+build	Run build_runner (Code Generation)	2026-08-11T04:14:55.6042744Z 
+build	Run build_runner (Code Generation)	2026-08-11T04:14:56.0897914Z [INFO] Initializing inputs
+build	Run build_runner (Code Generation)	2026-08-11T04:14:56.4560743Z [INFO] Building new asset graph...
+build	Run build_runner (Code Generation)	2026-08-11T04:14:57.5608601Z [INFO] Building new asset graph completed, took 1.1s
+build	Run build_runner (Code Generation)	2026-08-11T04:14:57.5609506Z 
+build	Run build_runner (Code Generation)	2026-08-11T04:14:57.5610191Z [INFO] Checking for unexpected pre-existing outputs....
+build	Run build_runner (Code Generation)	2026-08-11T04:14:57.5620340Z [INFO] Checking for unexpected pre-existing outputs. completed, took 1ms
+build	Run build_runner (Code Generation)	2026-08-11T04:14:57.5621003Z 
+build	Run build_runner (Code Generation)	2026-08-11T04:14:57.5713471Z [INFO] Running build...
+build	Run build_runner (Code Generation)	2026-08-11T04:14:57.6059538Z [INFO] Generating SDK summary...
+build	Run build_runner (Code Generation)	2026-08-11T04:14:59.6126318Z [INFO] 2.0s elapsed, 0/16 actions completed.
+build	Run build_runner (Code Generation)	2026-08-11T04:15:01.2956251Z [INFO] 3.7s elapsed, 0/16 actions completed.
+build	Run build_runner (Code Generation)	2026-08-11T04:15:01.3216876Z [WARNING] isar_generator on test/widget_test.dart:
+build	Run build_runner (Code Generation)	2026-08-11T04:15:01.3218031Z Your current `analyzer` version may not fully support your current SDK version.
+build	Run build_runner (Code Generation)	2026-08-11T04:15:01.3218744Z 
+build	Run build_runner (Code Generation)	2026-08-11T04:15:01.3219108Z Analyzer language version: 3.1.0
+build	Run build_runner (Code Generation)	2026-08-11T04:15:01.3219579Z SDK language version: 3.12.0
+build	Run build_runner (Code Generation)	2026-08-11T04:15:01.3219858Z 
+build	Run build_runner (Code Generation)	2026-08-11T04:15:01.3220156Z Please update to the latest `analyzer` version (14.1.0) by running
+build	Run build_runner (Code Generation)	2026-08-11T04:15:01.3221063Z `flutter packages upgrade`.
+build	Run build_runner (Code Generation)	2026-08-11T04:15:01.3221337Z 
+build	Run build_runner (Code Generation)	2026-08-11T04:15:01.3221645Z If you are not getting the latest version by running the above command, you
+build	Run build_runner (Code Generation)	2026-08-11T04:15:01.3222362Z can try adding a constraint like the following to your pubspec to start
+build	Run build_runner (Code Generation)	2026-08-11T04:15:01.3222864Z diagnosing why you can't get the latest version:
+build	Run build_runner (Code Generation)	2026-08-11T04:15:01.3223731Z 
+build	Run build_runner (Code Generation)	2026-08-11T04:15:01.3223906Z dev_dependencies:
+build	Run build_runner (Code Generation)	2026-08-11T04:15:01.3224287Z   analyzer: ^14.1.0
+build	Run build_runner (Code Generation)	2026-08-11T04:15:01.3224507Z 
+build	Run build_runner (Code Generation)	2026-08-11T04:15:02.2464673Z [INFO] Generating SDK summary completed, took 4.6s
+build	Run build_runner (Code Generation)	2026-08-11T04:15:02.2465255Z 
+build	Run build_runner (Code Generation)	2026-08-11T04:15:03.1532775Z [INFO] Running build completed, took 5.6s
+build	Run build_runner (Code Generation)	2026-08-11T04:15:03.1533277Z 
+build	Run build_runner (Code Generation)	2026-08-11T04:15:03.1533525Z [INFO] Caching finalized dependency graph...
+build	Run build_runner (Code Generation)	2026-08-11T04:15:03.2140430Z [INFO] Caching finalized dependency graph completed, took 60ms
+build	Run build_runner (Code Generation)	2026-08-11T04:15:03.2141143Z 
+build	Run build_runner (Code Generation)	2026-08-11T04:15:03.2160543Z [INFO] Succeeded after 5.6s with 10 outputs (73 actions)
+build	Run build_runner (Code Generation)	2026-08-11T04:15:03.2161095Z 
+build	Build APK	﻿2026-08-11T04:15:16.3968314Z ##[group]Run flutter build apk --release --no-tree-shake-icons --no-pub
+build	Build APK	2026-08-11T04:15:16.3969294Z [36;1mflutter build apk --release --no-tree-shake-icons --no-pub[0m
+build	Build APK	2026-08-11T04:15:16.4027854Z shell: /usr/bin/bash -e {0}
+build	Build APK	2026-08-11T04:15:16.4028320Z env:
+build	Build APK	2026-08-11T04:15:16.4028830Z   JAVA_HOME: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.20-8/x64
+build	Build APK	2026-08-11T04:15:16.4029617Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.20-8/x64
+build	Build APK	2026-08-11T04:15:16.4030284Z   MAVEN_ARGS: -ntp
+build	Build APK	2026-08-11T04:15:16.4031093Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.44.0-x64/flutter
+build	Build APK	2026-08-11T04:15:16.4031517Z   PUB_CACHE: /home/runner/.pub-cache
+build	Build APK	2026-08-11T04:15:16.4031793Z ##[endgroup]
+build	Build APK	2026-08-11T04:15:16.6545920Z Upgrading gradle.properties
+build	Build APK	2026-08-11T04:15:16.6681131Z Upgrading gradle.properties
+build	Build APK	2026-08-11T04:15:54.3901259Z Running Gradle task 'assembleRelease'...                        
+build	Build APK	2026-08-11T04:15:54.3908553Z Checking the license for package CMake 3.22.1 in /usr/local/lib/android/sdk/licenses
+build	Build APK	2026-08-11T04:15:54.3909731Z License for package CMake 3.22.1 accepted.
+build	Build APK	2026-08-11T04:15:54.3910454Z Preparing "Install CMake 3.22.1 v.3.22.1".
+build	Build APK	2026-08-11T04:15:55.4821445Z "Install CMake 3.22.1 v.3.22.1" ready.
+build	Build APK	2026-08-11T04:15:55.4830469Z Installing CMake 3.22.1 in /usr/local/lib/android/sdk/cmake/3.22.1
+build	Build APK	2026-08-11T04:15:55.4832677Z "Install CMake 3.22.1 v.3.22.1" complete.
+build	Build APK	2026-08-11T04:15:55.6824360Z "Install CMake 3.22.1 v.3.22.1" finished.
+build	Build APK	2026-08-11T04:16:10.1835446Z lib/features/play/play_screen.dart:299:24: Error: Too few positional arguments: 1 required, 0 given.
+build	Build APK	2026-08-11T04:16:10.1836692Z     ZenBottomSheet.show(
+build	Build APK	2026-08-11T04:16:10.1837440Z                        ^
+build	Build APK	2026-08-11T04:16:10.1839159Z lib/core/widgets/zen_bottom_sheet.dart:13:21: Context: Found this candidate, but the arguments don't match.
+build	Build APK	2026-08-11T04:16:10.1840422Z   static Future<T?> show<T>(BuildContext context, {required Widget child}) {
+build	Build APK	2026-08-11T04:16:10.1842124Z                     ^^^^
+build	Build APK	2026-08-11T04:16:17.0841933Z Target kernel_snapshot_program failed: Exception
+build	Build APK	2026-08-11T04:16:17.0871298Z 
+build	Build APK	2026-08-11T04:16:17.0891263Z 
+build	Build APK	2026-08-11T04:16:17.0891912Z FAILURE: Build failed with an exception.
+build	Build APK	2026-08-11T04:16:17.0892471Z 
+build	Build APK	2026-08-11T04:16:17.0892792Z * What went wrong:
+build	Build APK	2026-08-11T04:16:17.0893704Z Execution failed for task ':app:compileFlutterBuildRelease'.
+build	Build APK	2026-08-11T04:16:17.0895355Z > Process 'command '/opt/hostedtoolcache/flutter/stable-3.44.0-x64/flutter/bin/flutter'' finished with non-zero exit value 1
+build	Build APK	2026-08-11T04:16:17.0896591Z 
+build	Build APK	2026-08-11T04:16:17.0897035Z * Try:
+build	Build APK	2026-08-11T04:16:17.0897624Z > Run with --stacktrace option to get the stack trace.
+build	Build APK	2026-08-11T04:16:17.0898541Z > Run with --info or --debug option to get more log output.
+build	Build APK	2026-08-11T04:16:17.0899291Z > Run with --scan to get full insights.
+build	Build APK	2026-08-11T04:16:17.0899998Z > Get more help at https://help.gradle.org.
+build	Build APK	2026-08-11T04:16:17.0900475Z 
+build	Build APK	2026-08-11T04:16:17.0901048Z BUILD FAILED in 1m
+build	Build APK	2026-08-11T04:16:17.5571298Z Running Gradle task 'assembleRelease'...                           60.9s
+build	Build APK	2026-08-11T04:16:17.5671542Z Gradle task assembleRelease failed with exit code 1
+build	Build APK	2026-08-11T04:16:17.5739697Z ##[error]Process completed with exit code 1.
+build	Post Set up Flutter	﻿2026-08-11T04:16:17.5915915Z Post job cleanup.
+build	Post Set up Flutter	2026-08-11T04:16:17.5935301Z ##[start-action display=Cache pub dependencies;id=__53982092-082d-476d-ae6a-99ad4abe974b.cache-pub]
+build	Post Set up Flutter	2026-08-11T04:16:17.5937976Z ##[end-action id=__53982092-082d-476d-ae6a-99ad4abe974b.cache-pub;outcome=skipped;conclusion=skipped;duration_ms=0]
+build	Post Set up Flutter	2026-08-11T04:16:17.5939917Z ##[start-action display=Cache Flutter;id=__53982092-082d-476d-ae6a-99ad4abe974b.cache-flutter]
+build	Post Set up Flutter	2026-08-11T04:16:17.5942316Z ##[end-action id=__53982092-082d-476d-ae6a-99ad4abe974b.cache-flutter;outcome=skipped;conclusion=skipped;duration_ms=0]
+build	Post Set up Java	﻿2026-08-11T04:16:17.6009664Z Post job cleanup.
+build	Post Checkout repository	﻿2026-08-11T04:16:17.7385726Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+build	Post Checkout repository	2026-08-11T04:16:17.7387917Z Post job cleanup.
+build	Post Checkout repository	2026-08-11T04:16:17.8371225Z [command]/usr/bin/git version
+build	Post Checkout repository	2026-08-11T04:16:17.8416218Z git version 2.54.0
+build	Post Checkout repository	2026-08-11T04:16:17.8458280Z Temporarily overriding HOME='/home/runner/work/_temp/ebc8454a-1835-486a-83ba-2819d77fdd40' before making global git config changes
+build	Post Checkout repository	2026-08-11T04:16:17.8462966Z Adding repository directory to the temporary git global config as a safe directory
+build	Post Checkout repository	2026-08-11T04:16:17.8464835Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/zenmath/zenmath
+build	Post Checkout repository	2026-08-11T04:16:17.8503011Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+build	Post Checkout repository	2026-08-11T04:16:17.8537579Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+build	Post Checkout repository	2026-08-11T04:16:17.8792846Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+build	Post Checkout repository	2026-08-11T04:16:17.8821096Z http.https://github.com/.extraheader
+build	Post Checkout repository	2026-08-11T04:16:17.8836615Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+build	Post Checkout repository	2026-08-11T04:16:17.8867757Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+build	Post Checkout repository	2026-08-11T04:16:17.9128116Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+build	Post Checkout repository	2026-08-11T04:16:17.9166492Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+build	Complete job	﻿2026-08-11T04:16:17.9566606Z Cleaning up orphan processes
+build	Complete job	2026-08-11T04:16:17.9959768Z Terminate orphan process: pid (2799) (java)
+build	Complete job	2026-08-11T04:16:17.9969555Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/cache@v4, actions/checkout@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
