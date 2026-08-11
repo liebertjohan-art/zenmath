@@ -20,9 +20,8 @@ class PracticeScreen extends ConsumerStatefulWidget {
 
 class _PracticeScreenState extends ConsumerState<PracticeScreen> {
   final Random _random = Random();
-  late int num1;
-  late int num2;
   late int answer;
+  String questionText = '';
   String userInput = '';
   int currentQuestionIndex = 0;
   int score = 0;
@@ -40,13 +39,64 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
     int maxNum = widget.difficulty == 'easy' ? 10 : (widget.difficulty == 'medium' ? 50 : 100);
     
     if (widget.topic == 'Addition') {
-      num1 = _random.nextInt(maxNum) + 1;
-      num2 = _random.nextInt(maxNum) + 1;
-      answer = num1 + num2;
-    } else { // Subtraction
-      num1 = _random.nextInt(maxNum) + maxNum; // ensure positive result
-      num2 = _random.nextInt(maxNum) + 1;
-      answer = num1 - num2;
+      int n1 = _random.nextInt(maxNum) + 1;
+      int n2 = _random.nextInt(maxNum) + 1;
+      answer = n1 + n2;
+      questionText = '$n1 + $n2';
+    } else if (widget.topic == 'Subtraction') {
+      int n1 = _random.nextInt(maxNum) + maxNum;
+      int n2 = _random.nextInt(maxNum) + 1;
+      answer = n1 - n2;
+      questionText = '$n1 - $n2';
+    } else if (widget.topic == 'Multiplication') {
+      int mulMax = widget.difficulty == 'easy' ? 5 : (widget.difficulty == 'medium' ? 10 : 20);
+      int n1 = _random.nextInt(mulMax) + 1;
+      int n2 = _random.nextInt(mulMax) + 1;
+      answer = n1 * n2;
+      questionText = '$n1 × $n2';
+    } else if (widget.topic == 'Division') {
+      int divMax = widget.difficulty == 'easy' ? 5 : (widget.difficulty == 'medium' ? 10 : 20);
+      int n2 = _random.nextInt(divMax) + 1;
+      answer = _random.nextInt(divMax) + 1;
+      int n1 = n2 * answer;
+      questionText = '$n1 ÷ $n2';
+    } else if (widget.topic == 'Percentages') {
+      List<int> percs = widget.difficulty == 'easy' ? [10, 50] : (widget.difficulty == 'medium' ? [20, 25, 50] : [5, 15, 75]);
+      int perc = percs[_random.nextInt(percs.length)];
+      int multiplier = _random.nextInt(10) + 1;
+      int n2 = multiplier * 20 * (widget.difficulty == 'hard' ? 5 : 1);
+      answer = (n2 * perc) ~/ 100;
+      questionText = '$perc% of $n2';
+    } else if (widget.topic == 'Fractions') {
+      List<int> denoms = widget.difficulty == 'easy' ? [2] : (widget.difficulty == 'medium' ? [3, 4] : [5, 8]);
+      int denom = denoms[_random.nextInt(denoms.length)];
+      int num = _random.nextInt(denom - 1) + 1;
+      int multiplier = _random.nextInt(10) + 1;
+      int n2 = multiplier * denom * (widget.difficulty == 'hard' ? 2 : 1);
+      answer = (n2 * num) ~/ denom;
+      questionText = '$num/$denom of $n2';
+    } else if (widget.topic == 'Decimals') {
+      int whole1 = _random.nextInt(10) + 1;
+      int whole2 = _random.nextInt(10) + 1;
+      int dec1 = _random.nextInt(9) + 1;
+      int dec2 = 10 - dec1;
+      double d1 = whole1 + (dec1 / 10);
+      double d2 = whole2 + (dec2 / 10);
+      answer = whole1 + whole2 + 1;
+      questionText = '${d1.toStringAsFixed(1)} + ${d2.toStringAsFixed(1)}';
+    } else { // Algebra
+      int type = _random.nextInt(2);
+      if (type == 0) {
+        int a = _random.nextInt(maxNum) + 1;
+        answer = _random.nextInt(maxNum) + 1;
+        int b = answer + a;
+        questionText = 'x + $a = $b';
+      } else {
+        int a = _random.nextInt(10) + 2;
+        answer = _random.nextInt(10) + 2;
+        int b = a * answer;
+        questionText = '${a}x = $b';
+      }
     }
   }
 
@@ -125,8 +175,6 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String operatorSymbol = widget.topic == 'Addition' ? '+' : '-';
-
     return ZenScaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -167,9 +215,11 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
                         AnimatedSwitcher(
                           duration: const Duration(milliseconds: 300),
                           child: Text(
-                            '$num1 $operatorSymbol $num2',
+                            questionText,
                             key: ValueKey<int>(currentQuestionIndex),
-                            style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 64),
+                            style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                              fontSize: questionText.length > 8 ? 48 : 64,
+                            ),
                           ),
                         ),
                         const SizedBox(height: 24),

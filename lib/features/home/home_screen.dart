@@ -18,31 +18,24 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProviderStateMixin {
   late AnimationController _animController;
-  late Animation<double> _fadeAnim1;
-  late Animation<double> _fadeAnim2;
-  late Animation<Offset> _slideAnim1;
-  late Animation<Offset> _slideAnim2;
+  
+  final List<Map<String, String>> _topics = [
+    {'title': 'Addition', 'icon': '+'},
+    {'title': 'Subtraction', 'icon': '-'},
+    {'title': 'Multiplication', 'icon': '×'},
+    {'title': 'Division', 'icon': '÷'},
+    {'title': 'Percentages', 'icon': '%'},
+    {'title': 'Fractions', 'icon': '⅟'},
+    {'title': 'Decimals', 'icon': '.'},
+    {'title': 'Algebra', 'icon': 'x'},
+  ];
 
   @override
   void initState() {
     super.initState();
     _animController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 800),
-    );
-
-    _fadeAnim1 = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(parent: _animController, curve: const Interval(0.0, 0.6, curve: Curves.easeOutCubic))
-    );
-    _slideAnim1 = Tween<Offset>(begin: const Offset(0, 0.2), end: Offset.zero).animate(
-      CurvedAnimation(parent: _animController, curve: const Interval(0.0, 0.6, curve: Curves.easeOutCubic))
-    );
-
-    _fadeAnim2 = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(parent: _animController, curve: const Interval(0.2, 0.8, curve: Curves.easeOutCubic))
-    );
-    _slideAnim2 = Tween<Offset>(begin: const Offset(0, 0.2), end: Offset.zero).animate(
-      CurvedAnimation(parent: _animController, curve: const Interval(0.2, 0.8, curve: Curves.easeOutCubic))
+      duration: const Duration(milliseconds: 1500),
     );
 
     _animController.forward();
@@ -245,55 +238,47 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
               ),
               const SizedBox(height: 24),
               Expanded(
-                child: ListView(
+                child: ListView.builder(
                   physics: const BouncingScrollPhysics(),
-                  children: [
-                    FadeTransition(
-                      opacity: _fadeAnim1,
-                      child: SlideTransition(
-                        position: _slideAnim1,
-                        child: ZenCard(
-                          onTap: () => _showDifficultySheet(context, 'Addition'),
-                          child: Padding(
-                            padding: const EdgeInsets.all(24.0),
-                            child: Row(
-                              children: [
-                                const Text('+', style: TextStyle(fontSize: 32, color: Color(0xFFD4AF37))),
-                                const SizedBox(width: 24),
-                                Text(
-                                  'Addition',
-                                  style: Theme.of(context).textTheme.titleMedium,
-                                ),
-                              ],
+                  itemCount: _topics.length,
+                  itemBuilder: (context, index) {
+                    final topic = _topics[index];
+                    final start = (index * 0.1).clamp(0.0, 1.0);
+                    final end = (start + 0.4).clamp(0.0, 1.0);
+                    
+                    final fadeAnim = Tween<double>(begin: 0, end: 1).animate(
+                      CurvedAnimation(parent: _animController, curve: Interval(start, end, curve: Curves.easeOutCubic))
+                    );
+                    final slideAnim = Tween<Offset>(begin: const Offset(0, 0.2), end: Offset.zero).animate(
+                      CurvedAnimation(parent: _animController, curve: Interval(start, end, curve: Curves.easeOutCubic))
+                    );
+
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 16.0),
+                      child: FadeTransition(
+                        opacity: fadeAnim,
+                        child: SlideTransition(
+                          position: slideAnim,
+                          child: ZenCard(
+                            onTap: () => _showDifficultySheet(context, topic['title']!),
+                            child: Padding(
+                              padding: const EdgeInsets.all(24.0),
+                              child: Row(
+                                children: [
+                                  Text(topic['icon']!, style: const TextStyle(fontSize: 32, color: Color(0xFFD4AF37))),
+                                  const SizedBox(width: 24),
+                                  Text(
+                                    topic['title']!,
+                                    style: Theme.of(context).textTheme.titleMedium,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 16),
-                    FadeTransition(
-                      opacity: _fadeAnim2,
-                      child: SlideTransition(
-                        position: _slideAnim2,
-                        child: ZenCard(
-                          onTap: () => _showDifficultySheet(context, 'Subtraction'),
-                          child: Padding(
-                            padding: const EdgeInsets.all(24.0),
-                            child: Row(
-                              children: [
-                                const Text('-', style: TextStyle(fontSize: 32, color: Color(0xFFD4AF37))),
-                                const SizedBox(width: 24),
-                                Text(
-                                  'Subtraction',
-                                  style: Theme.of(context).textTheme.titleMedium,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                    );
+                  },
                 ),
               ),
             ],
