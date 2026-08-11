@@ -9,17 +9,17 @@
 > **Goal:** Rebuild the app skeleton — shell navigation, theme system, file structure.
 > **Priority:** P0 — Nothing else works without this.
 
-- [ ] **Restructure file system** — Rename `home/` → `play/`, create `history/`, `stats/`, `settings/` feature dirs.
-- [ ] **Create `zen_design_tokens.dart`** — `ThemeExtension<ZenDesignTokens>` with ALL color, spacing, radius tokens.
-- [ ] **Overhaul `zen_colors.dart`** — New dark palette (`#0A0A0F` background, `#14141F` surface, etc.) + full light palette (`#F8F7F4` background).
-- [ ] **Create `zen_typography.dart`** — Centralized TextStyle definitions with optical sizing (negative tracking on large, positive on small).
-- [ ] **Overhaul `app_theme.dart`** — Dual `ThemeData` (dark + light) using new color tokens. Both themes use `ThemeExtension`.
-- [ ] **Create `theme_provider.dart`** — Riverpod provider for theme mode (dark/light). Persist preference in Isar or SharedPreferences.
-- [ ] **Setup `ShellRoute` in `main.dart`** — Bottom navigation shell with 3 tabs: Play, History, Stats. Practice/Results/Settings as standalone push routes.
-- [ ] **Create `zen_bottom_nav.dart`** — Custom `BottomNavigationBar` with gold active indicator, custom icons, proper styling per RULES.md.
-- [ ] **Create persistent Header Bar** — Screen title (left) + Settings gear (right), transparent, no elevation.
-- [ ] **Create placeholder screens** — `HistoryScreen`, `StatsScreen`, `SettingsScreen` with proper scaffold and routing.
-- [ ] **Verify full navigation flow** — Tab switching, push routes (practice/results/settings), back navigation, deep linking.
+- [x] **Restructure file system** — Rename `home/` → `play/`, create `history/`, `stats/`, `settings/` feature dirs.
+- [x] **Create `zen_design_tokens.dart`** — `ThemeExtension<ZenDesignTokens>` with ALL color, spacing, radius tokens.
+- [x] **Overhaul `zen_colors.dart`** — New dark palette (`#0A0A0F` background, `#14141F` surface, etc.) + full light palette (`#F8F7F4` background).
+- [x] **Create `zen_typography.dart`** — Centralized TextStyle definitions with optical sizing (negative tracking on large, positive on small).
+- [x] **Overhaul `app_theme.dart`** — Dual `ThemeData` (dark + light) using new color tokens. Both themes use `ThemeExtension`.
+- [x] **Create `theme_provider.dart`** — Riverpod provider for theme mode (dark/light). Persist preference in Isar or SharedPreferences.
+- [x] **Setup `ShellRoute` in `main.dart`** — Bottom navigation shell with 3 tabs: Play, History, Stats. Practice/Results/Settings as standalone push routes.
+- [x] **Create `zen_bottom_nav.dart`** — Custom `BottomNavigationBar` with gold active indicator, custom icons, proper styling per RULES.md.
+- [x] **Create persistent Header Bar** — Screen title (left) + Settings gear (right), transparent, no elevation.
+- [x] **Create placeholder screens** — `HistoryScreen`, `StatsScreen`, `SettingsScreen` with proper scaffold and routing.
+- [x] **Verify full navigation flow** — Tab switching, push routes (practice/results/settings), back navigation, deep linking.
 
 ---
 
@@ -27,16 +27,16 @@
 > **Goal:** Build every reusable widget to premium spec BEFORE building screens.
 > **Priority:** P0 — Screens depend on these components.
 
-- [ ] **Overhaul `ZenCard`** — New decoration (hairline border dark / ambient shadow light), tap feedback (scale 0.97 + haptic), `AnimatedScale` on press.
-- [ ] **Create `ZenButton`** — Primary (gold pill), Secondary (outlined pill), Ghost variants. All with press feedback.
-- [ ] **Create `ZenProgressRing`** — `CustomPainter`-based circular progress. Gradient stroke (gold). Animated fill via `TweenAnimationBuilder`. Replace all `CircularProgressIndicator` usage.
-- [ ] **Overhaul `ZenNumPad`** — New styling per RULES.md. Scale(0.95) + color shift on press. Submit key in gold. Delete key with coral icon.
-- [ ] **Overhaul `ZenBottomSheet`** — Remove glassmorphism. Clean surface color, drag handle, proper radii (32px top corners), slide-up animation with strong ease-out.
-- [ ] **Create `ZenSegmentedControl`** — For difficulty selection (Easy/Medium/Hard) and stats period toggle (7d/30d).
-- [ ] **Overhaul `ZenScaffold`** — Theme-aware background color, proper safe area handling, integration with bottom nav shell.
-- [ ] **Create `animations.dart` utility** — Shared custom curves (`Cubic(0.23, 1.0, 0.32, 1.0)`), duration constants, reusable `PageRouteBuilder` transitions.
-- [ ] **Create `haptics.dart` utility** — Centralized haptic helpers: `ZenHaptics.light()`, `.medium()`, `.heavy()`, `.selection()`.
-- [ ] **Run Anti-Generic Checklist** on all components.
+- [x] **Overhaul `ZenCard`** — New decoration (hairline border dark / ambient shadow light), tap feedback (scale 0.97 + haptic), `AnimatedScale` on press.
+- [x] **Create `ZenButton`** — Primary (gold pill), Secondary (outlined pill), Ghost variants. All with press feedback.
+- [x] **Create `ZenProgressRing`** — `CustomPainter`-based circular progress. Gradient stroke (gold). Animated fill via `TweenAnimationBuilder`. Replace all `CircularProgressIndicator` usage.
+- [x] **Overhaul `ZenNumPad`** — New styling per RULES.md. Scale(0.95) + color shift on press. Submit key in gold. Delete key with coral icon.
+- [x] **Overhaul `ZenBottomSheet`** — Remove glassmorphism. Clean surface color, drag handle, proper radii (32px top corners), slide-up animation with strong ease-out.
+- [x] **Create `ZenSegmentedControl`** — For difficulty selection (Easy/Medium/Hard) and stats period toggle (7d/30d).
+- [x] **Overhaul `ZenScaffold`** — Theme-aware background color, proper safe area handling, integration with bottom nav shell.
+- [x] **Create `animations.dart` utility** — Shared custom curves (`Cubic(0.23, 1.0, 0.32, 1.0)`), duration constants, reusable `PageRouteBuilder` transitions.
+- [x] **Create `haptics.dart` utility** — Centralized haptic helpers: `ZenHaptics.light()`, `.medium()`, `.heavy()`, `.selection()`.
+- [x] **Run Anti-Generic Checklist** on all components.
 
 ---
 
