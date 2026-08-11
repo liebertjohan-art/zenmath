@@ -1,34 +1,157 @@
-# ZenMath — Development Roadmap
+# ZenMath — Development Roadmap (v2.0)
 
-## Phase 0: Foundation (Design System + Architecture)
-- [x] Initialize project with custom package name `com.akashiverse.zenmath`.
-- [x] Configure GitHub Actions CI/CD for automated cloud builds.
-- [x] Setup `Riverpod` for state management and `go_router` for navigation.
-- [x] Integrate `Isar` database for local offline storage.
-- [x] Define `ThemeData` with "Midnight Zen" `ColorScheme`.
-- [x] Setup `TextTheme` hierarchy using `Outfit` and `Plus Jakarta Sans` (`google_fonts`).
-- [x] Create design token constants (`ZenColors`, `ZenSpacing`, `ZenRadii`).
-- [x] Build base wrapper widgets (`ZenScaffold`, `ZenCard`, `GlassBottomSheet`).
+> **Previous Phases 0–3 are COMPLETE.** This roadmap starts fresh from the current state.
+> All tasks below are the NEW work required for the redesign and feature expansion.
 
-## Phase 1: MVP (Core Features & Flow)
-- [x] **Data Layer:** Define Isar schemas for `SessionScore`, `DailyProgress`, and `TopicStats`.
-- [x] **Home Screen:** Build the dashboard with static topic cards and a mockup progress ring.
-- [x] **Topic Selection:** Build the difficulty selection bottom sheet.
-- [x] **Practice Arena:** Build the core logic (question generation based on difficulty).
-- [x] **Custom Numpad:** Implement the `ZenNumPad` widget with haptics.
-- [x] **Results Screen:** Build the post-session summary screen.
-- [x] Connect the full flow: Home -> Select Difficulty -> Practice -> Results -> Home.
+---
 
-## Phase 2: Polish & Gamification (The Gold Layer)
-- [x] Implement actual Streak Tracking logic.
-- [x] Animate Home Screen topic cards (Staggered Entrance).
-- [x] Add `AnimatedSwitcher` for smooth question transitions in Practice Arena.
-- [x] Add wrong-answer shake animation and correct-answer soft glow.
-- [x] Integrate Haptic Feedback (`HapticFeedback.lightImpact()` on numpad, `mediumImpact` on completion).
-- [x] Implement the Growth Graph using `fl_chart` on the Home Screen.
+## Phase 4: Architecture Overhaul (Navigation + Theming)
+> **Goal:** Rebuild the app skeleton — shell navigation, theme system, file structure.
+> **Priority:** P0 — Nothing else works without this.
 
-## Phase 3: Expansion (Future P2 Features)
-- [ ] Add more topics: Percentages, Fractions, Decimals, Algebra basics.
-- [ ] Introduce Timed Challenges (Solve X in Y seconds).
-- [ ] Add XP / Level System and unlockable achievements.
-- [ ] Accessibility and Performance Audit (ensure 60/120fps smooth scrolling and rendering).
+- [ ] **Restructure file system** — Rename `home/` → `play/`, create `history/`, `stats/`, `settings/` feature dirs.
+- [ ] **Create `zen_design_tokens.dart`** — `ThemeExtension<ZenDesignTokens>` with ALL color, spacing, radius tokens.
+- [ ] **Overhaul `zen_colors.dart`** — New dark palette (`#0A0A0F` background, `#14141F` surface, etc.) + full light palette (`#F8F7F4` background).
+- [ ] **Create `zen_typography.dart`** — Centralized TextStyle definitions with optical sizing (negative tracking on large, positive on small).
+- [ ] **Overhaul `app_theme.dart`** — Dual `ThemeData` (dark + light) using new color tokens. Both themes use `ThemeExtension`.
+- [ ] **Create `theme_provider.dart`** — Riverpod provider for theme mode (dark/light). Persist preference in Isar or SharedPreferences.
+- [ ] **Setup `ShellRoute` in `main.dart`** — Bottom navigation shell with 3 tabs: Play, History, Stats. Practice/Results/Settings as standalone push routes.
+- [ ] **Create `zen_bottom_nav.dart`** — Custom `BottomNavigationBar` with gold active indicator, custom icons, proper styling per RULES.md.
+- [ ] **Create persistent Header Bar** — Screen title (left) + Settings gear (right), transparent, no elevation.
+- [ ] **Create placeholder screens** — `HistoryScreen`, `StatsScreen`, `SettingsScreen` with proper scaffold and routing.
+- [ ] **Verify full navigation flow** — Tab switching, push routes (practice/results/settings), back navigation, deep linking.
+
+---
+
+## Phase 5: Design System Components (The Foundation Layer)
+> **Goal:** Build every reusable widget to premium spec BEFORE building screens.
+> **Priority:** P0 — Screens depend on these components.
+
+- [ ] **Overhaul `ZenCard`** — New decoration (hairline border dark / ambient shadow light), tap feedback (scale 0.97 + haptic), `AnimatedScale` on press.
+- [ ] **Create `ZenButton`** — Primary (gold pill), Secondary (outlined pill), Ghost variants. All with press feedback.
+- [ ] **Create `ZenProgressRing`** — `CustomPainter`-based circular progress. Gradient stroke (gold). Animated fill via `TweenAnimationBuilder`. Replace all `CircularProgressIndicator` usage.
+- [ ] **Overhaul `ZenNumPad`** — New styling per RULES.md. Scale(0.95) + color shift on press. Submit key in gold. Delete key with coral icon.
+- [ ] **Overhaul `ZenBottomSheet`** — Remove glassmorphism. Clean surface color, drag handle, proper radii (32px top corners), slide-up animation with strong ease-out.
+- [ ] **Create `ZenSegmentedControl`** — For difficulty selection (Easy/Medium/Hard) and stats period toggle (7d/30d).
+- [ ] **Overhaul `ZenScaffold`** — Theme-aware background color, proper safe area handling, integration with bottom nav shell.
+- [ ] **Create `animations.dart` utility** — Shared custom curves (`Cubic(0.23, 1.0, 0.32, 1.0)`), duration constants, reusable `PageRouteBuilder` transitions.
+- [ ] **Create `haptics.dart` utility** — Centralized haptic helpers: `ZenHaptics.light()`, `.medium()`, `.heavy()`, `.selection()`.
+- [ ] **Run Anti-Generic Checklist** on all components.
+
+---
+
+## Phase 6: Screen Redesign — Play (Home Dashboard)
+> **Goal:** Completely redesign the home screen to premium spec.
+> **Priority:** P0
+
+- [ ] **Contextual greeting** — "Good morning/afternoon/evening" based on time of day. `titleLarge` style.
+- [ ] **Stats row** — Streak ring (left, `ZenProgressRing`) + Level/XP card (right) in a `Row`.
+- [ ] **Streak ring** — Custom painted, gold gradient, large centered streak number with fire emoji. "Day Streak" label below.
+- [ ] **Level/XP section** — Current level number (display style), XP progress bar (linear, gold fill), "X / 500 XP" label.
+- [ ] **Featured action card** — "Timed Challenge" with timer icon, description, tap → practice with `isTimed: true`.
+- [ ] **Topics section** — "Topics" section header + 2-column `GridView` of topic cards.
+- [ ] **Topic cards** — Each with math symbol icon (gold) + topic name. Tap → difficulty bottom sheet.
+- [ ] **Staggered entrance animation** — Cards fade+slide in with 50ms stagger. Strong ease-out curve.
+- [ ] **Difficulty bottom sheet** — `ZenBottomSheet` with `ZenSegmentedControl` (Easy/Medium/Hard) + "Start" `ZenButton`.
+- [ ] **Run Anti-Generic Checklist.**
+
+---
+
+## Phase 7: Screen Redesign — Practice Arena & Results
+> **Goal:** Polish the core practice flow to premium spec.
+> **Priority:** P0
+
+### Practice Arena
+- [ ] **Fullscreen mode** — No bottom nav, no header. Only close (X) top-left + progress top-center.
+- [ ] **Progress indicator** — Minimal: "3 / 10" text or thin linear progress bar (gold) at top.
+- [ ] **Question display** — MASSIVE 72px Outfit Bold, centered, with `AnimatedSwitcher` (scale+fade transition).
+- [ ] **User input display** — Below question, 48px, gold when typing, `textTertiary` when empty ("?").
+- [ ] **Feedback system** — Correct: surface glows `success` at 20% opacity, 300ms. Wrong: shake animation (spring physics, ±12px, 3 oscillations) + surface glows `error` at 20%.
+- [ ] **Timer display (timed mode)** — Centered top, large, color shifts to coral when <10s.
+- [ ] **Numpad** — Redesigned `ZenNumPad` at bottom third of screen.
+- [ ] **Custom page transition** — Entering practice = slide up from bottom (400ms, strong ease-out).
+
+### Results Screen
+- [ ] **Fullscreen mode** — No bottom nav. "Session Complete" title.
+- [ ] **Accuracy ring** — Large `ZenProgressRing`, animated fill (1.2s), color-coded (green >80%, gold 50-80%, coral <50%).
+- [ ] **Score count-up** — `TweenAnimationBuilder` counting from 0 to score, 1s duration.
+- [ ] **XP gained display** — "+50 XP" with gold accent, animated entrance.
+- [ ] **Continue button** — `ZenButton` primary, "Continue" → navigates to Play tab.
+- [ ] **Staggered entrance** — All elements fade+slide in with 50ms stagger.
+
+---
+
+## Phase 8: New Screens — History & Stats
+> **Goal:** Build the two new tab screens.
+> **Priority:** P1
+
+### History Screen
+- [ ] **Session list** — `ListView.builder` with session cards, grouped by date (Today, Yesterday, This Week, Earlier).
+- [ ] **Session card** — Topic icon + name, score (X/Y), accuracy %, date/time. Color accent based on accuracy.
+- [ ] **Empty state** — Illustration (or icon+text) + "Start your first session" with CTA button.
+- [ ] **Pull-to-refresh** — Refresh with spring physics, custom indicator (gold).
+- [ ] **Staggered entrance** — Cards animate in on first load.
+
+### Stats Screen
+- [ ] **Period toggle** — `ZenSegmentedControl` for 7-day / 30-day / All Time.
+- [ ] **Growth chart** — `fl_chart` line chart, success color, in a `ZenCard`. Responsive to period toggle.
+- [ ] **Stats grid** — 2x2 grid: Total Sessions, Best Streak, Avg Accuracy, Total XP. Each in a mini `ZenCard`.
+- [ ] **Topic breakdown** — List of topics with mini horizontal progress bars showing performance per topic.
+- [ ] **Level section** — Current level, XP progress bar, total XP earned.
+- [ ] **Staggered entrance** — All sections animate in.
+
+---
+
+## Phase 9: Settings Screen & Theme Toggle
+> **Goal:** Build the settings screen with theme switching.
+> **Priority:** P1
+
+- [ ] **Settings screen structure** — Grouped list with section headers.
+- [ ] **Appearance section:**
+  - [ ] Theme toggle: Dark / Light mode switch (custom styled toggle or segmented control)
+  - [ ] Theme applies immediately via `theme_provider.dart`
+  - [ ] Preference persists across app restarts
+- [ ] **Practice section:**
+  - [ ] Default difficulty selector
+  - [ ] Default question count (10, 15, 20)
+  - [ ] Sound effects toggle (future)
+- [ ] **Feedback section:**
+  - [ ] Haptic feedback toggle (on/off)
+  - [ ] Animations toggle (reduced motion support)
+- [ ] **About section:**
+  - [ ] App version
+  - [ ] "Built with ❤️ by Akashiverse"
+- [ ] **Back navigation** — AppBar with back arrow, title "Settings".
+
+---
+
+## Phase 10: Polish & Delight (The Gold Layer)
+> **Goal:** The invisible details that make it feel $150k.
+> **Priority:** P2
+
+- [ ] **Custom page transitions** — `PageRouteBuilder` for all route transitions (slide up for practice, fade for tab content).
+- [ ] **Splash screen** — Soft fade-in of ZenMath wordmark, 1.5s, `Hero` transition to home.
+- [ ] **Loading states** — Shimmer/skeleton for async data (streak, XP, chart data).
+- [ ] **Error states** — Friendly error messages with retry CTA, not raw "Err" text.
+- [ ] **Empty states** — Thoughtful empty states for history (no sessions yet) and stats (no data yet).
+- [ ] **Pull-to-refresh** — Custom refresh indicator with gold accent.
+- [ ] **Scroll physics** — `BouncingScrollPhysics` everywhere for iOS-like feel.
+- [ ] **Edge-to-edge treatment** — Proper `SystemUiOverlayStyle` for status bar + nav bar theming.
+- [ ] **App icon** — Minimal ZenMath icon (gold accent on dark) for launcher.
+- [ ] **Review all animations at 2-5x speed** — Check for timing issues, sync problems.
+- [ ] **Performance audit** — 60fps check on real device, jank elimination, `RepaintBoundary` placement.
+- [ ] **Accessibility audit** — `Semantics` on all interactive elements, contrast ratios, font scaling.
+
+---
+
+## Phase 11+: Future Expansion (Backlog)
+> **Priority:** P3 — After core redesign is complete and polished.
+
+- [ ] Onboarding flow for first-time users (3 screens, staggered, premium)
+- [ ] Achievement system with unlockable badges
+- [ ] Daily challenge mode (1 challenge per day, specific topic+difficulty)
+- [ ] Sound effects (subtle, toggleable)
+- [ ] Practice history detail view (tap a history card → see question-by-question breakdown)
+- [ ] Export stats (share as image)
+- [ ] Widget for Android home screen (streak counter)
+- [ ] Localization support (Hindi, etc.)

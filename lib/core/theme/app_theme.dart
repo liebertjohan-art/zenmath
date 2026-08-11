@@ -1,78 +1,102 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'zen_colors.dart';
+import 'zen_typography.dart';
+import 'zen_design_tokens.dart';
 
 class AppTheme {
-  static ThemeData get darkTheme {
-    final textTheme = TextTheme(
-      displayLarge: GoogleFonts.outfit(
-        fontSize: 48,
-        fontWeight: FontWeight.bold,
-        color: ZenColors.textPrimary,
-      ),
-      displayMedium: GoogleFonts.outfit(
-        fontSize: 36,
-        fontWeight: FontWeight.bold,
-        color: ZenColors.textPrimary,
-      ),
-      titleLarge: GoogleFonts.outfit(
-        fontSize: 28,
-        fontWeight: FontWeight.w600,
-        color: ZenColors.textPrimary,
-      ),
-      titleMedium: GoogleFonts.plusJakartaSans(
-        fontSize: 20,
-        fontWeight: FontWeight.w500,
-        color: ZenColors.textPrimary,
-      ),
-      bodyLarge: GoogleFonts.plusJakartaSans(
-        fontSize: 16,
-        fontWeight: FontWeight.normal,
-        color: ZenColors.textPrimary,
-      ),
-      bodyMedium: GoogleFonts.plusJakartaSans(
-        fontSize: 14,
-        fontWeight: FontWeight.normal,
-        color: ZenColors.textPrimary,
-      ),
-      labelLarge: GoogleFonts.plusJakartaSans(
-        fontSize: 16,
-        fontWeight: FontWeight.w600,
-        color: ZenColors.zenGold,
-      ),
-      labelSmall: GoogleFonts.plusJakartaSans(
-        fontSize: 12,
-        fontWeight: FontWeight.w500,
-        color: ZenColors.textSecondary,
-      ),
-    );
+  static final _darkTokens = ZenDesignTokens(
+    background: ZenColors.backgroundDark,
+    surface: ZenColors.surfaceDark,
+    surfaceVariant: ZenColors.surfaceVariantDark,
+    surfaceBright: ZenColors.surfaceBrightDark,
+    primary: ZenColors.primaryDark,
+    primaryMuted: ZenColors.primaryMutedDark,
+    primarySubtle: ZenColors.primaryDark.withOpacity(0.12),
+    success: ZenColors.successDark,
+    successMuted: ZenColors.successMutedDark,
+    error: ZenColors.errorDark,
+    errorMuted: ZenColors.errorDark.withOpacity(0.15),
+    textPrimary: ZenColors.textPrimaryDark,
+    textSecondary: ZenColors.textSecondaryDark,
+    textTertiary: ZenColors.textTertiaryDark,
+    divider: Colors.white.withOpacity(0.06),
+    navBarSurface: ZenColors.navBarSurfaceDark,
+  );
 
+  static final _lightTokens = ZenDesignTokens(
+    background: ZenColors.backgroundLight,
+    surface: ZenColors.surfaceLight,
+    surfaceVariant: ZenColors.surfaceVariantLight,
+    surfaceBright: ZenColors.surfaceBrightLight,
+    primary: ZenColors.primaryLight,
+    primaryMuted: ZenColors.primaryMutedLight,
+    primarySubtle: ZenColors.primaryLight.withOpacity(0.12),
+    success: ZenColors.successLight,
+    successMuted: ZenColors.successLight,
+    error: ZenColors.errorLight,
+    errorMuted: ZenColors.errorLight.withOpacity(0.15),
+    textPrimary: ZenColors.textPrimaryLight,
+    textSecondary: ZenColors.textSecondaryLight,
+    textTertiary: ZenColors.textTertiaryLight,
+    divider: Colors.black.withOpacity(0.06),
+    navBarSurface: ZenColors.navBarSurfaceLight,
+  );
+
+  static ThemeData get darkTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
-      scaffoldBackgroundColor: ZenColors.midnightBlack,
-      primaryColor: ZenColors.zenGold,
-      colorScheme: const ColorScheme.dark(
-        primary: ZenColors.zenGold,
-        secondary: ZenColors.sageGreen,
-        surface: ZenColors.deepSlate,
-        error: ZenColors.softCoral,
-        onPrimary: ZenColors.midnightBlack,
-        onSurface: ZenColors.textPrimary,
+      scaffoldBackgroundColor: _darkTokens.background,
+      primaryColor: _darkTokens.primary,
+      colorScheme: ColorScheme.dark(
+        primary: _darkTokens.primary,
+        secondary: _darkTokens.success,
+        surface: _darkTokens.surface,
+        error: _darkTokens.error,
+        onPrimary: _darkTokens.background,
+        onSurface: _darkTokens.textPrimary,
       ),
-      textTheme: textTheme,
-      cardTheme: CardThemeData(
-        color: ZenColors.deepSlate,
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24.0),
-        ),
+      textTheme: ZenTypography.getTextTheme(
+        _darkTokens.textPrimary,
+        _darkTokens.textSecondary,
+        _darkTokens.textTertiary,
       ),
+      extensions: [_darkTokens],
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: false,
         scrolledUnderElevation: 0,
+      ),
+    );
+  }
+
+  static ThemeData get lightTheme {
+    return ThemeData(
+      useMaterial3: true,
+      brightness: Brightness.light,
+      scaffoldBackgroundColor: _lightTokens.background,
+      primaryColor: _lightTokens.primary,
+      colorScheme: ColorScheme.light(
+        primary: _lightTokens.primary,
+        secondary: _lightTokens.success,
+        surface: _lightTokens.surface,
+        error: _lightTokens.error,
+        onPrimary: _lightTokens.background,
+        onSurface: _lightTokens.textPrimary,
+      ),
+      textTheme: ZenTypography.getTextTheme(
+        _lightTokens.textPrimary,
+        _lightTokens.textSecondary,
+        _lightTokens.textTertiary,
+      ),
+      extensions: [_lightTokens],
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: false,
+        scrolledUnderElevation: 0,
+        iconTheme: IconThemeData(color: Color(0xFF1A1A24)),
       ),
     );
   }
