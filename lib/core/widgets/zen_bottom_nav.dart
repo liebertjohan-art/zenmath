@@ -17,44 +17,53 @@ class ScaffoldWithNavBar extends StatelessWidget {
     return Scaffold(
       backgroundColor: tokens.background,
       body: child,
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: tokens.navBarSurface,
-          border: Border(
-            top: BorderSide(
-              color: tokens.divider,
-              width: 0.5,
-            ),
-          ),
-        ),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _NavBarItem(
-                  icon: Icons.play_arrow_rounded,
-                  label: 'Play',
-                  isSelected: _calculateSelectedIndex(context) == 0,
-                  onTap: () => context.go('/play'),
-                  tokens: tokens,
-                ),
-                _NavBarItem(
-                  icon: Icons.history_rounded,
-                  label: 'History',
-                  isSelected: _calculateSelectedIndex(context) == 1,
-                  onTap: () => context.go('/history'),
-                  tokens: tokens,
-                ),
-                _NavBarItem(
-                  icon: Icons.bar_chart_rounded,
-                  label: 'Stats',
-                  isSelected: _calculateSelectedIndex(context) == 2,
-                  onTap: () => context.go('/stats'),
-                  tokens: tokens,
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
+          child: Container(
+            decoration: BoxDecoration(
+              color: tokens.surface.withOpacity(0.95),
+              borderRadius: BorderRadius.circular(999),
+              border: Border.all(
+                color: tokens.divider,
+                width: 0.5,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 20,
+                  offset: const Offset(0, 8),
                 ),
               ],
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  _NavBarItem(
+                    icon: Icons.play_arrow_rounded,
+                    label: 'Play',
+                    isSelected: _calculateSelectedIndex(context) == 0,
+                    onTap: () => context.go('/play'),
+                    tokens: tokens,
+                  ),
+                  _NavBarItem(
+                    icon: Icons.history_rounded,
+                    label: 'History',
+                    isSelected: _calculateSelectedIndex(context) == 1,
+                    onTap: () => context.go('/history'),
+                    tokens: tokens,
+                  ),
+                  _NavBarItem(
+                    icon: Icons.bar_chart_rounded,
+                    label: 'Stats',
+                    isSelected: _calculateSelectedIndex(context) == 2,
+                    onTap: () => context.go('/stats'),
+                    tokens: tokens,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

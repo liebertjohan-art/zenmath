@@ -5,14 +5,14 @@ class ZenAnimations {
   static const Duration tapFeedback = Duration(milliseconds: 150);
   static const Duration popoverEnter = Duration(milliseconds: 250);
   static const Duration popoverExit = Duration(milliseconds: 175);
-  static const Duration sheetEnter = Duration(milliseconds: 350);
-  static const Duration sheetExit = Duration(milliseconds: 250);
-  static const Duration pageTransition = Duration(milliseconds: 400);
-  static const Duration staggerDelay = Duration(milliseconds: 50);
+  static const Duration sheetEnter = Duration(milliseconds: 300);
+  static const Duration sheetExit = Duration(milliseconds: 200);
+  static const Duration pageTransition = Duration(milliseconds: 250);
+  static const Duration staggerDelay = Duration(milliseconds: 40);
 
-  // Curves (Apple/Kowalski spec)
-  static const Curve easeOutUI = Cubic(0.23, 1.0, 0.32, 1.0); // Strong ease-out
-  static const Curve easeInOutUI = Cubic(0.77, 0.0, 0.175, 1.0); // Strong ease-in-out
+  // Curves (Brutal / Clean spec)
+  static const Curve easeOutUI = Cubic(0.1, 1.0, 0.0, 1.0); // Sharp, fast ease-out
+  static const Curve easeInOutUI = Cubic(0.8, 0.0, 0.2, 1.0); // Sharp ease-in-out
   
   // Custom Page Transitions
   static Route<T> slideUpRoute<T>(Widget page) {

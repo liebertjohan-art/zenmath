@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../theme/zen_design_tokens.dart';
 import '../theme/zen_spacing.dart';
@@ -17,7 +18,10 @@ class ZenBottomSheet extends StatelessWidget {
       isScrollControlled: true,
       elevation: 0,
       barrierColor: Colors.black.withOpacity(0.5),
-      builder: (context) => ZenBottomSheet(child: child),
+      builder: (context) => BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+        child: ZenBottomSheet(child: child),
+      ),
     );
   }
 
@@ -27,11 +31,12 @@ class ZenBottomSheet extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: tokens.surface,
+        color: tokens.surface.withOpacity(0.85),
         borderRadius: const BorderRadius.vertical(top: Radius.circular(ZenRadii.xxl)),
+        border: Border.all(color: tokens.divider, width: 0.5),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.2),
+            color: Colors.black.withOpacity(0.1),
             blurRadius: 24,
             offset: const Offset(0, -8),
           ),

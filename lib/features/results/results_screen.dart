@@ -91,7 +91,8 @@ class _ResultsScreenState extends State<ResultsScreen> with SingleTickerProvider
                 Text(
                   'Session Complete',
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    color: tokens.textPrimary,
+                    color: resultColor,
+                    fontWeight: FontWeight.bold,
                   ),
                   textAlign: TextAlign.center,
                 ),

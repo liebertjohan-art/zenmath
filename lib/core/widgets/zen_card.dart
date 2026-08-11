@@ -73,25 +73,15 @@ class _ZenCardState extends State<ZenCard> with SingleTickerProviderStateMixin {
       decoration: BoxDecoration(
         color: widget.backgroundColor ?? tokens.surface,
         borderRadius: ZenRadii.lgRadius,
-        border: isDark 
-            ? Border.all(color: tokens.divider, width: 0.5) 
-            : null,
-        boxShadow: isDark ? [
+        border: Border.all(
+          color: tokens.divider, 
+          width: 0.5,
+        ),
+        boxShadow: isDark ? [] : [
           BoxShadow(
-            color: Colors.black.withOpacity(0.3),
-            blurRadius: 20,
-            offset: const Offset(0, 8),
-          ),
-        ] : [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.03),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 24,
-            offset: const Offset(0, 8),
+            color: Colors.black.withOpacity(0.02),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
           ),
         ],
       ),

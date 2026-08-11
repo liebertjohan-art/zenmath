@@ -106,6 +106,13 @@ final _router = GoRouter(
   ],
 );
 
+class _ZenScrollBehavior extends ScrollBehavior {
+  @override
+  ScrollPhysics getScrollPhysics(BuildContext context) {
+    return const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics());
+  }
+}
+
 class ZenMathApp extends ConsumerWidget {
   const ZenMathApp({super.key});
 
@@ -119,6 +126,7 @@ class ZenMathApp extends ConsumerWidget {
       darkTheme: AppTheme.darkTheme,
       themeMode: themeMode,
       routerConfig: _router,
+      scrollBehavior: _ZenScrollBehavior(),
       debugShowCheckedModeBanner: false,
     );
   }
