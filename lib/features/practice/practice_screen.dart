@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,8 +12,9 @@ import '../../providers/streak_provider.dart';
 class PracticeScreen extends ConsumerStatefulWidget {
   final String topic;
   final String difficulty;
+  final bool isTimed;
 
-  const PracticeScreen({super.key, required this.topic, required this.difficulty});
+  const PracticeScreen({super.key, required this.topic, required this.difficulty, this.isTimed = false});
 
   @override
   ConsumerState<PracticeScreen> createState() => _PracticeScreenState();
@@ -28,46 +30,74 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
   final int totalQuestions = 10;
   Color _feedbackColor = Colors.transparent;
   double _shakeOffset = 0;
+  Timer? _timer;
+  int timeLeft = 60;
 
   @override
   void initState() {
     super.initState();
     _generateQuestion();
+    if (widget.isTimed) {
+      _startTimer();
+    }
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (timeLeft > 0) {
+        setState(() => timeLeft--);
+      } else {
+        _timer?.cancel();
+        _finishSession();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 
   void _generateQuestion() {
+    String currentTopic = widget.topic;
+    if (currentTopic == 'Mixed') {
+      List<String> all = ['Addition', 'Subtraction', 'Multiplication', 'Division', 'Percentages', 'Fractions', 'Decimals', 'Algebra'];
+      currentTopic = all[_random.nextInt(all.length)];
+    }
+    
     int maxNum = widget.difficulty == 'easy' ? 10 : (widget.difficulty == 'medium' ? 50 : 100);
     
-    if (widget.topic == 'Addition') {
+    if (currentTopic == 'Addition') {
       int n1 = _random.nextInt(maxNum) + 1;
       int n2 = _random.nextInt(maxNum) + 1;
       answer = n1 + n2;
       questionText = '$n1 + $n2';
-    } else if (widget.topic == 'Subtraction') {
+    } else if (currentTopic == 'Subtraction') {
       int n1 = _random.nextInt(maxNum) + maxNum;
       int n2 = _random.nextInt(maxNum) + 1;
       answer = n1 - n2;
       questionText = '$n1 - $n2';
-    } else if (widget.topic == 'Multiplication') {
+    } else if (currentTopic == 'Multiplication') {
       int mulMax = widget.difficulty == 'easy' ? 5 : (widget.difficulty == 'medium' ? 10 : 20);
       int n1 = _random.nextInt(mulMax) + 1;
       int n2 = _random.nextInt(mulMax) + 1;
       answer = n1 * n2;
       questionText = '$n1 × $n2';
-    } else if (widget.topic == 'Division') {
+    } else if (currentTopic == 'Division') {
       int divMax = widget.difficulty == 'easy' ? 5 : (widget.difficulty == 'medium' ? 10 : 20);
       int n2 = _random.nextInt(divMax) + 1;
       answer = _random.nextInt(divMax) + 1;
       int n1 = n2 * answer;
       questionText = '$n1 ÷ $n2';
-    } else if (widget.topic == 'Percentages') {
+    } else if (currentTopic == 'Percentages') {
       List<int> percs = widget.difficulty == 'easy' ? [10, 50] : (widget.difficulty == 'medium' ? [20, 25, 50] : [5, 15, 75]);
       int perc = percs[_random.nextInt(percs.length)];
       int multiplier = _random.nextInt(10) + 1;
       int n2 = multiplier * 20 * (widget.difficulty == 'hard' ? 5 : 1);
       answer = (n2 * perc) ~/ 100;
       questionText = '$perc% of $n2';
-    } else if (widget.topic == 'Fractions') {
+    } else if (currentTopic == 'Fractions') {
       List<int> denoms = widget.difficulty == 'easy' ? [2] : (widget.difficulty == 'medium' ? [3, 4] : [5, 8]);
       int denom = denoms[_random.nextInt(denoms.length)];
       int num = _random.nextInt(denom - 1) + 1;
@@ -75,7 +105,7 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
       int n2 = multiplier * denom * (widget.difficulty == 'hard' ? 2 : 1);
       answer = (n2 * num) ~/ denom;
       questionText = '$num/$denom of $n2';
-    } else if (widget.topic == 'Decimals') {
+    } else if (currentTopic == 'Decimals') {
       int whole1 = _random.nextInt(10) + 1;
       int whole2 = _random.nextInt(10) + 1;
       int dec1 = _random.nextInt(9) + 1;
@@ -148,7 +178,7 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
 
     Future.delayed(const Duration(milliseconds: 600), () {
       if (!mounted) return;
-      if (currentQuestionIndex < totalQuestions - 1) {
+      if (widget.isTimed || currentQuestionIndex < totalQuestions - 1) {
         setState(() {
           currentQuestionIndex++;
           _generateQuestion();
@@ -156,20 +186,26 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
           _feedbackColor = Colors.transparent;
         });
       } else {
-        ref.read(progressProvider).saveSession(
-          widget.topic,
-          widget.difficulty,
-          score,
-          totalQuestions,
-        );
-        ref.invalidate(streakProvider);
-        context.pushReplacement('/results', extra: {
-          'topic': widget.topic,
-          'difficulty': widget.difficulty,
-          'score': score,
-          'totalQuestions': totalQuestions,
-        });
+        _finishSession();
       }
+    });
+  }
+
+  void _finishSession() {
+    if (!mounted) return;
+    int answered = widget.isTimed ? max(currentQuestionIndex, score) : totalQuestions;
+    ref.read(progressProvider).saveSession(
+      widget.topic,
+      widget.difficulty,
+      score,
+      answered,
+    );
+    ref.invalidate(streakProvider);
+    context.pushReplacement('/results', extra: {
+      'topic': widget.topic,
+      'difficulty': widget.difficulty,
+      'score': score,
+      'totalQuestions': answered,
     });
   }
 
@@ -183,7 +219,18 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
           icon: const Icon(Icons.close),
           onPressed: () => context.pop(),
         ),
-        title: Text('${currentQuestionIndex + 1} / $totalQuestions', style: Theme.of(context).textTheme.titleMedium),
+        title: widget.isTimed
+            ? Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.timer, color: Color(0xFFD4AF37)),
+                  const SizedBox(width: 8),
+                  Text('$timeLeft s', style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: timeLeft <= 10 ? const Color(0xFFE07A5F) : null,
+                  )),
+                ],
+              )
+            : Text('${currentQuestionIndex + 1} / $totalQuestions', style: Theme.of(context).textTheme.titleMedium),
         centerTitle: true,
       ),
       body: SafeArea(

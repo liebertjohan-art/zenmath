@@ -21,6 +21,22 @@ final weeklyProgressProvider = FutureProvider.autoDispose<List<DailyProgress>>((
   return weekly;
 });
 
+final xpProvider = FutureProvider.autoDispose<Map<String, int>>((ref) async {
+  final isarService = ref.watch(dbProvider);
+  final isar = await isarService.db;
+  final allProgress = await isar.collection<DailyProgress>().where().findAll();
+  
+  int totalXp = 0;
+  for (var p in allProgress) {
+    totalXp += p.xpEarned;
+  }
+  
+  int level = (totalXp / 500).floor() + 1;
+  int currentLevelXp = totalXp % 500;
+  
+  return {'totalXp': totalXp, 'level': level, 'currentLevelXp': currentLevelXp, 'nextLevelXp': 500};
+});
+
 class ProgressService {
   final ProviderRef ref;
   ProgressService(this.ref);

@@ -28,6 +28,7 @@ final _router = GoRouter(
         return PracticeScreen(
           topic: extra?['topic'] as String? ?? 'Addition',
           difficulty: extra?['difficulty'] as String? ?? 'easy',
+          isTimed: extra?['isTimed'] as bool? ?? false,
         );
       },
     ),

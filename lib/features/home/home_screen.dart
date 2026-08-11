@@ -150,6 +150,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
   Widget build(BuildContext context) {
     final streakAsync = ref.watch(streakProvider);
     final weeklyAsync = ref.watch(weeklyProgressProvider);
+    final xpAsync = ref.watch(xpProvider);
 
     return ZenScaffold(
       appBar: AppBar(
@@ -166,9 +167,26 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Focus & Flow',
-                style: Theme.of(context).textTheme.displayMedium,
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    'Focus & Flow',
+                    style: Theme.of(context).textTheme.displayMedium,
+                  ),
+                  const Spacer(),
+                  xpAsync.when(
+                    data: (data) => Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text('Level ${data['level']}', style: const TextStyle(color: Color(0xFFD4AF37), fontWeight: FontWeight.bold, fontSize: 18)),
+                        Text('${data['currentLevelXp']} / 500 XP', style: const TextStyle(color: Colors.grey, fontSize: 12)),
+                      ],
+                    ),
+                    loading: () => const SizedBox(),
+                    error: (e, st) => const SizedBox(),
+                  ),
+                ],
               ),
               const SizedBox(height: 32),
               Row(
@@ -232,6 +250,28 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
                 ],
               ),
               const SizedBox(height: 48),
+              ZenCard(
+                onTap: () => context.push('/practice', extra: {'topic': 'Mixed', 'difficulty': 'medium', 'isTimed': true}),
+                child: Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Row(
+                    children: [
+                      const Text('⏱️', style: TextStyle(fontSize: 32)),
+                      const SizedBox(width: 24),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Timed Challenge', style: Theme.of(context).textTheme.titleMedium),
+                            const Text('60 seconds. Mixed topics. Go.', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 32),
               Text(
                 'Topics',
                 style: Theme.of(context).textTheme.titleLarge,
