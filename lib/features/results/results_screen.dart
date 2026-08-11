@@ -155,7 +155,7 @@ class _ResultsScreenState extends State<ResultsScreen> with SingleTickerProvider
                 4,
                 ZenButton(
                   label: 'Continue',
-                  onPressed: () => context.go('/'),
+                  onPressed: () => context.go('/play'),
                   variant: ZenButtonVariant.primary,
                 ),
               ),

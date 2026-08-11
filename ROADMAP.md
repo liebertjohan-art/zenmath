@@ -62,22 +62,22 @@
 > **Priority:** P0
 
 ### Practice Arena
-- [ ] **Fullscreen mode** — No bottom nav, no header. Only close (X) top-left + progress top-center.
-- [ ] **Progress indicator** — Minimal: "3 / 10" text or thin linear progress bar (gold) at top.
-- [ ] **Question display** — MASSIVE 72px Outfit Bold, centered, with `AnimatedSwitcher` (scale+fade transition).
-- [ ] **User input display** — Below question, 48px, gold when typing, `textTertiary` when empty ("?").
-- [ ] **Feedback system** — Correct: surface glows `success` at 20% opacity, 300ms. Wrong: shake animation (spring physics, ±12px, 3 oscillations) + surface glows `error` at 20%.
-- [ ] **Timer display (timed mode)** — Centered top, large, color shifts to coral when <10s.
-- [ ] **Numpad** — Redesigned `ZenNumPad` at bottom third of screen.
-- [ ] **Custom page transition** — Entering practice = slide up from bottom (400ms, strong ease-out).
+- [x] **Fullscreen mode** — No bottom nav, no header. Only close (X) top-left + progress top-center.
+- [x] **Progress indicator** — Minimal: "3 / 10" text or thin linear progress bar (gold) at top.
+- [x] **Question display** — MASSIVE 72px Outfit Bold, centered, with `AnimatedSwitcher` (scale+fade transition).
+- [x] **User input display** — Below question, 48px, gold when typing, `textTertiary` when empty ("?").
+- [x] **Feedback system** — Correct: surface glows `success` at 20% opacity, 300ms. Wrong: shake animation (spring physics, ±12px, 3 oscillations) + surface glows `error` at 20%.
+- [x] **Timer display (timed mode)** — Centered top, large, color shifts to coral when <10s.
+- [x] **Numpad** — Redesigned `ZenNumPad` at bottom third of screen.
+- [x] **Custom page transition** — Entering practice = slide up from bottom (400ms, strong ease-out).
 
 ### Results Screen
-- [ ] **Fullscreen mode** — No bottom nav. "Session Complete" title.
-- [ ] **Accuracy ring** — Large `ZenProgressRing`, animated fill (1.2s), color-coded (green >80%, gold 50-80%, coral <50%).
-- [ ] **Score count-up** — `TweenAnimationBuilder` counting from 0 to score, 1s duration.
-- [ ] **XP gained display** — "+50 XP" with gold accent, animated entrance.
-- [ ] **Continue button** — `ZenButton` primary, "Continue" → navigates to Play tab.
-- [ ] **Staggered entrance** — All elements fade+slide in with 50ms stagger.
+- [x] **Fullscreen mode** — No bottom nav. "Session Complete" title.
+- [x] **Accuracy ring** — Large `ZenProgressRing`, animated fill (1.2s), color-coded (green >80%, gold 50-80%, coral <50%).
+- [x] **Score count-up** — `TweenAnimationBuilder` counting from 0 to score, 1s duration.
+- [x] **XP gained display** — "+50 XP" with gold accent, animated entrance.
+- [x] **Continue button** — `ZenButton` primary, "Continue" → navigates to Play tab.
+- [x] **Staggered entrance** — All elements fade+slide in with 50ms stagger.
 
 ---
 
@@ -86,19 +86,19 @@
 > **Priority:** P1
 
 ### History Screen
-- [ ] **Session list** — `ListView.builder` with session cards, grouped by date (Today, Yesterday, This Week, Earlier).
-- [ ] **Session card** — Topic icon + name, score (X/Y), accuracy %, date/time. Color accent based on accuracy.
-- [ ] **Empty state** — Illustration (or icon+text) + "Start your first session" with CTA button.
-- [ ] **Pull-to-refresh** — Refresh with spring physics, custom indicator (gold).
-- [ ] **Staggered entrance** — Cards animate in on first load.
+- [x] **Session list** — `ListView.builder` with session cards, grouped by date (Today, Yesterday, This Week, Earlier).
+- [x] **Session card** — Topic icon + name, score (X/Y), accuracy %, date/time. Color accent based on accuracy.
+- [x] **Empty state** — Illustration (or icon+text) + "Start your first session" with CTA button.
+- [x] **Pull-to-refresh** — Refresh with spring physics, custom indicator (gold).
+- [x] **Staggered entrance** — Cards animate in on first load.
 
 ### Stats Screen
-- [ ] **Period toggle** — `ZenSegmentedControl` for 7-day / 30-day / All Time.
-- [ ] **Growth chart** — `fl_chart` line chart, success color, in a `ZenCard`. Responsive to period toggle.
-- [ ] **Stats grid** — 2x2 grid: Total Sessions, Best Streak, Avg Accuracy, Total XP. Each in a mini `ZenCard`.
-- [ ] **Topic breakdown** — List of topics with mini horizontal progress bars showing performance per topic.
-- [ ] **Level section** — Current level, XP progress bar, total XP earned.
-- [ ] **Staggered entrance** — All sections animate in.
+- [x] **Period toggle** — `ZenSegmentedControl` for 7-day / 30-day / All Time.
+- [x] **Growth chart** — `fl_chart` line chart, success color, in a `ZenCard`. Responsive to period toggle.
+- [x] **Stats grid** — 2x2 grid: Total Sessions, Best Streak, Avg Accuracy, Total XP. Each in a mini `ZenCard`.
+- [x] **Topic breakdown** — List of topics with mini horizontal progress bars showing performance per topic.
+- [x] **Level section** — Current level, XP progress bar, total XP earned.
+- [x] **Staggered entrance** — All sections animate in.
 
 ---
 
