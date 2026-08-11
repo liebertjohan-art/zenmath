@@ -110,10 +110,13 @@ class _ResultsScreenState extends State<ResultsScreen> with SingleTickerProvider
                       duration: const Duration(seconds: 1),
                       curve: Curves.easeOutCubic,
                       builder: (context, value, child) {
-                        return Text(
-                          '${value.toInt()}%',
-                          style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                            color: tokens.textPrimary,
+                        return FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            '${value.toInt()}%',
+                            style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                              color: tokens.textPrimary,
+                            ),
                           ),
                         );
                       },

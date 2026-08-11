@@ -166,6 +166,9 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> with TickerProv
         userInput += num.toString();
         _feedbackColor = Colors.transparent;
       });
+      if (int.tryParse(userInput) == answer) {
+        _onSubmit();
+      }
     }
   }
 
@@ -212,16 +215,19 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> with TickerProv
     });
   }
 
-  void _finishSession() {
+  void _finishSession() async {
     if (!mounted) return;
     int answered = widget.isTimed ? max(currentQuestionIndex, score) : totalQuestions;
-    ref.read(progressProvider).saveSession(
+    await ref.read(progressProvider).saveSession(
       widget.topic,
       widget.difficulty,
       score,
       answered,
     );
     ref.invalidate(streakProvider);
+    ref.invalidate(xpProvider);
+    ref.invalidate(weeklyProgressProvider);
+    if (!mounted) return;
     context.pushReplacement('/results', extra: {
       'topic': widget.topic,
       'difficulty': widget.difficulty,
@@ -278,53 +284,53 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> with TickerProv
                       child: child,
                     );
                   },
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    curve: ZenAnimations.easeOutUI,
-                    padding: const EdgeInsets.symmetric(horizontal: ZenSpacing.xxl, vertical: ZenSpacing.xxl * 2),
-                    decoration: BoxDecoration(
-                      color: _feedbackColor == Colors.transparent 
-                          ? Colors.transparent 
-                          : _feedbackColor.withOpacity(0.1),
-                      borderRadius: ZenRadii.xxlRadius,
-                      border: Border.all(
-                        color: _feedbackColor == Colors.transparent 
-                            ? Colors.transparent 
-                            : _feedbackColor.withOpacity(0.3),
-                        width: 2,
-                      ),
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        AnimatedSwitcher(
-                          duration: const Duration(milliseconds: 300),
-                          transitionBuilder: (Widget child, Animation<double> animation) {
-                            return FadeTransition(
-                              opacity: animation,
-                              child: ScaleTransition(
-                                scale: Tween<double>(begin: 0.9, end: 1.0).animate(
-                                  CurvedAnimation(parent: animation, curve: Curves.easeOutBack)
-                                ),
-                                child: child,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 300),
+                        transitionBuilder: (Widget child, Animation<double> animation) {
+                          return FadeTransition(
+                            opacity: animation,
+                            child: ScaleTransition(
+                              scale: Tween<double>(begin: 0.9, end: 1.0).animate(
+                                CurvedAnimation(parent: animation, curve: Curves.easeOutBack)
                               ),
-                            );
-                          },
-                          child: Text(
-                            questionText,
-                            key: ValueKey<int>(currentQuestionIndex),
-                            style: TextStyle(
-                              fontFamily: 'Outfit',
-                              fontWeight: FontWeight.w700,
-                              fontSize: questionText.length > 8 ? 56 : 72,
-                              color: tokens.textPrimary,
-                              height: 1.1,
+                              child: child,
                             ),
-                            textAlign: TextAlign.center,
+                          );
+                        },
+                        child: Text(
+                          questionText,
+                          key: ValueKey<int>(currentQuestionIndex),
+                          style: TextStyle(
+                            fontFamily: 'Outfit',
+                            fontWeight: FontWeight.w700,
+                            fontSize: questionText.length > 8 ? 56 : 72,
+                            color: tokens.textPrimary,
+                            height: 1.1,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      const SizedBox(height: ZenSpacing.xxl),
+                      AnimatedContainer(
+                        duration: const Duration(milliseconds: 300),
+                        curve: ZenAnimations.easeOutUI,
+                        padding: const EdgeInsets.symmetric(horizontal: ZenSpacing.xxl, vertical: ZenSpacing.md),
+                        decoration: BoxDecoration(
+                          color: _feedbackColor == Colors.transparent 
+                              ? Colors.transparent 
+                              : _feedbackColor.withOpacity(0.1),
+                          borderRadius: ZenRadii.lgRadius,
+                          border: Border.all(
+                            color: _feedbackColor == Colors.transparent 
+                                ? Colors.transparent 
+                                : _feedbackColor.withOpacity(0.3),
+                            width: 2,
                           ),
                         ),
-                        const SizedBox(height: ZenSpacing.xxl),
-                        AnimatedSwitcher(
+                        child: AnimatedSwitcher(
                           duration: const Duration(milliseconds: 150),
                           child: Text(
                             userInput.isEmpty ? '?' : userInput,
@@ -337,8 +343,8 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> with TickerProv
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
