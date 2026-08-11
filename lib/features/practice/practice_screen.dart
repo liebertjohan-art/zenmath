@@ -1,11 +1,14 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/theme/zen_design_tokens.dart';
+import '../../core/theme/zen_spacing.dart';
 import '../../core/widgets/zen_scaffold.dart';
 import '../../core/widgets/zen_numpad.dart';
+import '../../core/utils/animations.dart';
+import '../../core/utils/haptics.dart';
 import '../../providers/progress_provider.dart';
 import '../../providers/streak_provider.dart';
 
@@ -14,13 +17,18 @@ class PracticeScreen extends ConsumerStatefulWidget {
   final String difficulty;
   final bool isTimed;
 
-  const PracticeScreen({super.key, required this.topic, required this.difficulty, this.isTimed = false});
+  const PracticeScreen({
+    super.key, 
+    required this.topic, 
+    required this.difficulty, 
+    this.isTimed = false,
+  });
 
   @override
   ConsumerState<PracticeScreen> createState() => _PracticeScreenState();
 }
 
-class _PracticeScreenState extends ConsumerState<PracticeScreen> {
+class _PracticeScreenState extends ConsumerState<PracticeScreen> with TickerProviderStateMixin {
   final Random _random = Random();
   late int answer;
   String questionText = '';
@@ -28,14 +36,35 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
   int currentQuestionIndex = 0;
   int score = 0;
   final int totalQuestions = 10;
+  
+  // Feedback state
   Color _feedbackColor = Colors.transparent;
-  double _shakeOffset = 0;
+  
+  // Timer state
   Timer? _timer;
   int timeLeft = 60;
+  
+  // Animation controllers
+  late AnimationController _shakeController;
+  late Animation<double> _shakeAnimation;
 
   @override
   void initState() {
     super.initState();
+    _shakeController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 400),
+    );
+    
+    // Spring-like shake physics
+    _shakeAnimation = TweenSequence<double>([
+      TweenSequenceItem(tween: Tween(begin: 0, end: -12).chain(CurveTween(curve: Curves.easeOutCubic)), weight: 1),
+      TweenSequenceItem(tween: Tween(begin: -12, end: 12).chain(CurveTween(curve: Curves.easeInOutSine)), weight: 2),
+      TweenSequenceItem(tween: Tween(begin: 12, end: -8).chain(CurveTween(curve: Curves.easeInOutSine)), weight: 2),
+      TweenSequenceItem(tween: Tween(begin: -8, end: 4).chain(CurveTween(curve: Curves.easeInOutSine)), weight: 2),
+      TweenSequenceItem(tween: Tween(begin: 4, end: 0).chain(CurveTween(curve: Curves.easeOutCubic)), weight: 1),
+    ]).animate(_shakeController);
+
     _generateQuestion();
     if (widget.isTimed) {
       _startTimer();
@@ -56,6 +85,7 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
   @override
   void dispose() {
     _timer?.cancel();
+    _shakeController.dispose();
     super.dispose();
   }
 
@@ -132,7 +162,6 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
 
   void _onNumber(int num) {
     if (userInput.length < 5) {
-      HapticFeedback.lightImpact();
       setState(() {
         userInput += num.toString();
         _feedbackColor = Colors.transparent;
@@ -142,7 +171,6 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
 
   void _onDelete() {
     if (userInput.isNotEmpty) {
-      HapticFeedback.lightImpact();
       setState(() {
         userInput = userInput.substring(0, userInput.length - 1);
         _feedbackColor = Colors.transparent;
@@ -153,30 +181,23 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
   void _onSubmit() {
     if (userInput.isEmpty) return;
 
+    final tokens = Theme.of(context).extension<ZenDesignTokens>()!;
     int parsedInput = int.parse(userInput);
     bool isCorrect = parsedInput == answer;
 
     setState(() {
-      _feedbackColor = isCorrect ? const Color(0xFF8BA888) : const Color(0xFFE07A5F);
-      if (isCorrect) {
-        score++;
-        HapticFeedback.mediumImpact();
-      } else {
-        HapticFeedback.heavyImpact();
-        _shakeOffset = 15;
-        Future.delayed(const Duration(milliseconds: 50), () {
-          if (mounted) setState(() => _shakeOffset = -15);
-        });
-        Future.delayed(const Duration(milliseconds: 100), () {
-          if (mounted) setState(() => _shakeOffset = 15);
-        });
-        Future.delayed(const Duration(milliseconds: 150), () {
-          if (mounted) setState(() => _shakeOffset = 0);
-        });
-      }
+      _feedbackColor = isCorrect ? tokens.success : tokens.error;
     });
 
-    Future.delayed(const Duration(milliseconds: 600), () {
+    if (isCorrect) {
+      score++;
+      ZenHaptics.medium();
+    } else {
+      ZenHaptics.heavy();
+      _shakeController.forward(from: 0);
+    }
+
+    Future.delayed(const Duration(milliseconds: 500), () {
       if (!mounted) return;
       if (widget.isTimed || currentQuestionIndex < totalQuestions - 1) {
         setState(() {
@@ -211,26 +232,37 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final tokens = Theme.of(context).extension<ZenDesignTokens>()!;
+    
     return ZenScaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.close),
+          icon: Icon(Icons.close_rounded, color: tokens.textSecondary),
           onPressed: () => context.pop(),
         ),
         title: widget.isTimed
             ? Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(Icons.timer, color: Color(0xFFD4AF37)),
-                  const SizedBox(width: 8),
-                  Text('$timeLeft s', style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: timeLeft <= 10 ? const Color(0xFFE07A5F) : null,
-                  )),
+                  Icon(Icons.timer_rounded, color: tokens.primary, size: 20),
+                  const SizedBox(width: ZenSpacing.xs),
+                  Text(
+                    '$timeLeft s', 
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: timeLeft <= 10 ? tokens.error : tokens.textPrimary,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ],
               )
-            : Text('${currentQuestionIndex + 1} / $totalQuestions', style: Theme.of(context).textTheme.titleMedium),
+            : Text(
+                '${currentQuestionIndex + 1} / $totalQuestions', 
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: tokens.textSecondary,
+                ),
+              ),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -238,45 +270,70 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
           children: [
             Expanded(
               child: Center(
-                child: Transform.translate(
-                  offset: Offset(_shakeOffset, 0),
+                child: AnimatedBuilder(
+                  animation: _shakeAnimation,
+                  builder: (context, child) {
+                    return Transform.translate(
+                      offset: Offset(_shakeAnimation.value, 0),
+                      child: child,
+                    );
+                  },
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
-                    padding: const EdgeInsets.all(48),
+                    curve: ZenAnimations.easeOutUI,
+                    padding: const EdgeInsets.symmetric(horizontal: ZenSpacing.xxl, vertical: ZenSpacing.xxl * 2),
                     decoration: BoxDecoration(
-                      color: _feedbackColor.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(32),
-                      boxShadow: _feedbackColor == Colors.transparent
-                          ? []
-                          : [
-                              BoxShadow(
-                                color: _feedbackColor.withOpacity(0.3),
-                                blurRadius: 30,
-                                spreadRadius: 5,
-                              ),
-                            ],
+                      color: _feedbackColor == Colors.transparent 
+                          ? Colors.transparent 
+                          : _feedbackColor.withOpacity(0.1),
+                      borderRadius: ZenRadii.xxlRadius,
+                      border: Border.all(
+                        color: _feedbackColor == Colors.transparent 
+                            ? Colors.transparent 
+                            : _feedbackColor.withOpacity(0.3),
+                        width: 2,
+                      ),
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         AnimatedSwitcher(
                           duration: const Duration(milliseconds: 300),
+                          transitionBuilder: (Widget child, Animation<double> animation) {
+                            return FadeTransition(
+                              opacity: animation,
+                              child: ScaleTransition(
+                                scale: Tween<double>(begin: 0.9, end: 1.0).animate(
+                                  CurvedAnimation(parent: animation, curve: Curves.easeOutBack)
+                                ),
+                                child: child,
+                              ),
+                            );
+                          },
                           child: Text(
                             questionText,
                             key: ValueKey<int>(currentQuestionIndex),
-                            style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                              fontSize: questionText.length > 8 ? 48 : 64,
+                            style: TextStyle(
+                              fontFamily: 'Outfit',
+                              fontWeight: FontWeight.w700,
+                              fontSize: questionText.length > 8 ? 56 : 72,
+                              color: tokens.textPrimary,
+                              height: 1.1,
                             ),
+                            textAlign: TextAlign.center,
                           ),
                         ),
-                        const SizedBox(height: 24),
+                        const SizedBox(height: ZenSpacing.xxl),
                         AnimatedSwitcher(
                           duration: const Duration(milliseconds: 150),
                           child: Text(
                             userInput.isEmpty ? '?' : userInput,
                             key: ValueKey<String>(userInput),
-                            style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                              color: userInput.isEmpty ? Colors.grey : const Color(0xFFD4AF37),
+                            style: TextStyle(
+                              fontFamily: 'Outfit',
+                              fontWeight: FontWeight.w600,
+                              fontSize: 48,
+                              color: userInput.isEmpty ? tokens.textTertiary : tokens.primary,
                             ),
                           ),
                         ),
@@ -287,7 +344,7 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+              padding: const EdgeInsets.symmetric(horizontal: ZenSpacing.sm, vertical: ZenSpacing.md),
               child: ZenNumPad(
                 onNumber: _onNumber,
                 onDelete: _onDelete,
