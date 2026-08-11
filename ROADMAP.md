@@ -106,22 +106,22 @@
 > **Goal:** Build the settings screen with theme switching.
 > **Priority:** P1
 
-- [ ] **Settings screen structure** — Grouped list with section headers.
-- [ ] **Appearance section:**
-  - [ ] Theme toggle: Dark / Light mode switch (custom styled toggle or segmented control)
-  - [ ] Theme applies immediately via `theme_provider.dart`
-  - [ ] Preference persists across app restarts
-- [ ] **Practice section:**
-  - [ ] Default difficulty selector
-  - [ ] Default question count (10, 15, 20)
-  - [ ] Sound effects toggle (future)
-- [ ] **Feedback section:**
-  - [ ] Haptic feedback toggle (on/off)
-  - [ ] Animations toggle (reduced motion support)
-- [ ] **About section:**
-  - [ ] App version
-  - [ ] "Built with ❤️ by Akashiverse"
-- [ ] **Back navigation** — AppBar with back arrow, title "Settings".
+- [x] **Settings screen structure** — Grouped list with section headers.
+- [x] **Appearance section:**
+  - [x] Theme toggle: Dark / Light mode switch (custom styled toggle or segmented control)
+  - [x] Theme applies immediately via `theme_provider.dart`
+  - [x] Preference persists across app restarts
+- [x] **Practice section:**
+  - [x] Default difficulty selector
+  - [x] Default question count (10, 15, 20)
+  - [x] Sound effects toggle (future)
+- [x] **Feedback section:**
+  - [x] Haptic feedback toggle (on/off)
+  - [x] Animations toggle (reduced motion support)
+- [x] **About section:**
+  - [x] App version
+  - [x] "Built with ❤️ by Akashiverse"
+- [x] **Back navigation** — AppBar with back arrow, title "Settings".
 
 ---
 
