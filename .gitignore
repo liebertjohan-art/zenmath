@@ -47,3 +47,4 @@ downloads/
 
 # Local properties
 android/local.properties
+*.jks
