@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../theme/zen_colors.dart';
+import '../theme/zen_design_tokens.dart';
 
 class ZenScaffold extends StatelessWidget {
   final Widget body;
@@ -17,8 +17,10 @@ class ZenScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final tokens = Theme.of(context).extension<ZenDesignTokens>()!;
+    
     return Scaffold(
-      backgroundColor: ZenColors.midnightBlack,
+      backgroundColor: tokens.background,
       appBar: appBar,
       extendBodyBehindAppBar: extendBodyBehindAppBar,
       body: body,
