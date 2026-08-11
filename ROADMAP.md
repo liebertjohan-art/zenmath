@@ -44,16 +44,16 @@
 > **Goal:** Completely redesign the home screen to premium spec.
 > **Priority:** P0
 
-- [ ] **Contextual greeting** — "Good morning/afternoon/evening" based on time of day. `titleLarge` style.
-- [ ] **Stats row** — Streak ring (left, `ZenProgressRing`) + Level/XP card (right) in a `Row`.
-- [ ] **Streak ring** — Custom painted, gold gradient, large centered streak number with fire emoji. "Day Streak" label below.
-- [ ] **Level/XP section** — Current level number (display style), XP progress bar (linear, gold fill), "X / 500 XP" label.
-- [ ] **Featured action card** — "Timed Challenge" with timer icon, description, tap → practice with `isTimed: true`.
-- [ ] **Topics section** — "Topics" section header + 2-column `GridView` of topic cards.
-- [ ] **Topic cards** — Each with math symbol icon (gold) + topic name. Tap → difficulty bottom sheet.
-- [ ] **Staggered entrance animation** — Cards fade+slide in with 50ms stagger. Strong ease-out curve.
-- [ ] **Difficulty bottom sheet** — `ZenBottomSheet` with `ZenSegmentedControl` (Easy/Medium/Hard) + "Start" `ZenButton`.
-- [ ] **Run Anti-Generic Checklist.**
+- [x] **Contextual greeting** — "Good morning/afternoon/evening" based on time of day. `titleLarge` style.
+- [x] **Stats row** — Streak ring (left, `ZenProgressRing`) + Level/XP card (right) in a `Row`.
+- [x] **Streak ring** — Custom painted, gold gradient, large centered streak number with fire emoji. "Day Streak" label below.
+- [x] **Level/XP section** — Current level number (display style), XP progress bar (linear, gold fill), "X / 500 XP" label.
+- [x] **Featured action card** — "Timed Challenge" with timer icon, description, tap → practice with `isTimed: true`.
+- [x] **Topics section** — "Topics" section header + 2-column `GridView` of topic cards.
+- [x] **Topic cards** — Each with math symbol icon (gold) + topic name. Tap → difficulty bottom sheet.
+- [x] **Staggered entrance animation** — Cards fade+slide in with 50ms stagger. Strong ease-out curve.
+- [x] **Difficulty bottom sheet** — `ZenBottomSheet` with `ZenSegmentedControl` (Easy/Medium/Hard) + "Start" `ZenButton`.
+- [x] **Run Anti-Generic Checklist.**
 
 ---
 
