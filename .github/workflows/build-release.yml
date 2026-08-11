@@ -35,7 +35,7 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          key: ${{ runner.os }}-gradle-${{ github.run_id }}
           restore-keys: |
             ${{ runner.os }}-gradle-
 
@@ -53,6 +53,14 @@ jobs:
           key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
           restore-keys: |
             ${{ runner.os }}-pub-
+
+      - name: Cache build_runner
+        uses: actions/cache@v4
+        with:
+          path: .dart_tool/build
+          key: ${{ runner.os }}-build-runner-${{ github.run_id }}
+          restore-keys: |
+            ${{ runner.os }}-build-runner-
 
       - name: Install dependencies
         run: flutter pub get
