@@ -6,13 +6,11 @@ import '../theme/zen_spacing.dart';
 class ZenNumPad extends StatelessWidget {
   final Function(int) onNumber;
   final VoidCallback onDelete;
-  final VoidCallback onSubmit;
 
   const ZenNumPad({
     super.key,
     required this.onNumber,
     required this.onDelete,
-    required this.onSubmit,
   });
 
   Widget _buildButton(BuildContext context, String text, VoidCallback onTap, ZenDesignTokens tokens, {bool isSubmit = false, bool isDelete = false}) {
@@ -67,7 +65,7 @@ class ZenNumPad extends StatelessWidget {
           children: [
             _buildButton(context, 'DEL', onDelete, tokens, isDelete: true),
             _buildButton(context, '0', () => onNumber(0), tokens),
-            _buildButton(context, 'GO', onSubmit, tokens, isSubmit: true),
+            const Expanded(child: SizedBox()),
           ],
         ),
       ],

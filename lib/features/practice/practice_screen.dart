@@ -166,7 +166,7 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> with TickerProv
         userInput += num.toString();
         _feedbackColor = Colors.transparent;
       });
-      if (int.tryParse(userInput) == answer) {
+      if (userInput.length == answer.toString().length) {
         _onSubmit();
       }
     }
@@ -200,7 +200,8 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> with TickerProv
       _shakeController.forward(from: 0);
     }
 
-    Future.delayed(const Duration(milliseconds: 500), () {
+    int delayMs = isCorrect ? 50 : 400;
+    Future.delayed(Duration(milliseconds: delayMs), () {
       if (!mounted) return;
       if (widget.isTimed || currentQuestionIndex < totalQuestions - 1) {
         setState(() {
@@ -248,27 +249,47 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> with TickerProv
           icon: Icon(Icons.close_rounded, color: tokens.textSecondary),
           onPressed: () => context.pop(),
         ),
-        title: widget.isTimed
-            ? Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.timer_rounded, color: tokens.primary, size: 20),
-                  const SizedBox(width: ZenSpacing.xs),
-                  Text(
-                    '$timeLeft s', 
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: timeLeft <= 10 ? tokens.error : tokens.textPrimary,
-                      fontWeight: FontWeight.bold,
-                    ),
+        title: Container(
+          padding: const EdgeInsets.symmetric(horizontal: ZenSpacing.md, vertical: ZenSpacing.xs),
+          decoration: BoxDecoration(
+            color: tokens.surfaceVariant,
+            borderRadius: ZenRadii.fullRadius,
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (widget.isTimed) ...[
+                Icon(Icons.timer_rounded, color: tokens.primary, size: 16),
+                const SizedBox(width: ZenSpacing.xs),
+                Text(
+                  '$timeLeft s', 
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    color: timeLeft <= 10 ? tokens.error : tokens.textPrimary,
+                    fontWeight: FontWeight.bold,
                   ),
-                ],
-              )
-            : Text(
-                '${currentQuestionIndex + 1} / $totalQuestions', 
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: tokens.textSecondary,
                 ),
-              ),
+                const SizedBox(width: ZenSpacing.md),
+              ],
+              if (!widget.isTimed) ...[
+                Text(
+                  '${currentQuestionIndex + 1} / $totalQuestions', 
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    color: tokens.textPrimary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(width: ZenSpacing.md),
+              ],
+              Icon(Icons.check_circle_rounded, color: tokens.success, size: 16),
+              const SizedBox(width: 4),
+              Text('$score', style: Theme.of(context).textTheme.labelLarge?.copyWith(color: tokens.textPrimary)),
+              const SizedBox(width: ZenSpacing.sm),
+              Icon(Icons.cancel_rounded, color: tokens.error, size: 16),
+              const SizedBox(width: 4),
+              Text('${currentQuestionIndex - score}', style: Theme.of(context).textTheme.labelLarge?.copyWith(color: tokens.textPrimary)),
+            ],
+          ),
+        ),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -288,13 +309,13 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> with TickerProv
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       AnimatedSwitcher(
-                        duration: const Duration(milliseconds: 300),
+                        duration: const Duration(milliseconds: 100),
                         transitionBuilder: (Widget child, Animation<double> animation) {
                           return FadeTransition(
                             opacity: animation,
                             child: ScaleTransition(
-                              scale: Tween<double>(begin: 0.9, end: 1.0).animate(
-                                CurvedAnimation(parent: animation, curve: Curves.easeOutBack)
+                              scale: Tween<double>(begin: 0.95, end: 1.0).animate(
+                                CurvedAnimation(parent: animation, curve: Curves.easeOut)
                               ),
                               child: child,
                             ),
@@ -315,7 +336,7 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> with TickerProv
                       ),
                       const SizedBox(height: ZenSpacing.xxl),
                       AnimatedContainer(
-                        duration: const Duration(milliseconds: 300),
+                        duration: const Duration(milliseconds: 100),
                         curve: ZenAnimations.easeOutUI,
                         padding: const EdgeInsets.symmetric(horizontal: ZenSpacing.xxl, vertical: ZenSpacing.md),
                         decoration: BoxDecoration(
@@ -331,7 +352,7 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> with TickerProv
                           ),
                         ),
                         child: AnimatedSwitcher(
-                          duration: const Duration(milliseconds: 150),
+                          duration: const Duration(milliseconds: 50),
                           child: Text(
                             userInput.isEmpty ? '?' : userInput,
                             key: ValueKey<String>(userInput),
@@ -354,7 +375,6 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> with TickerProv
               child: ZenNumPad(
                 onNumber: _onNumber,
                 onDelete: _onDelete,
-                onSubmit: _onSubmit,
               ),
             ),
           ],
