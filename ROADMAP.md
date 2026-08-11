@@ -129,18 +129,18 @@
 > **Goal:** The invisible details that make it feel $150k.
 > **Priority:** P2
 
-- [ ] **Custom page transitions** — `PageRouteBuilder` for all route transitions (slide up for practice, fade for tab content).
-- [ ] **Splash screen** — Soft fade-in of ZenMath wordmark, 1.5s, `Hero` transition to home.
-- [ ] **Loading states** — Shimmer/skeleton for async data (streak, XP, chart data).
-- [ ] **Error states** — Friendly error messages with retry CTA, not raw "Err" text.
-- [ ] **Empty states** — Thoughtful empty states for history (no sessions yet) and stats (no data yet).
-- [ ] **Pull-to-refresh** — Custom refresh indicator with gold accent.
-- [ ] **Scroll physics** — `BouncingScrollPhysics` everywhere for iOS-like feel.
-- [ ] **Edge-to-edge treatment** — Proper `SystemUiOverlayStyle` for status bar + nav bar theming.
-- [ ] **App icon** — Minimal ZenMath icon (gold accent on dark) for launcher.
-- [ ] **Review all animations at 2-5x speed** — Check for timing issues, sync problems.
-- [ ] **Performance audit** — 60fps check on real device, jank elimination, `RepaintBoundary` placement.
-- [ ] **Accessibility audit** — `Semantics` on all interactive elements, contrast ratios, font scaling.
+- [x] **Custom page transitions** — `PageRouteBuilder` for all route transitions (slide up for practice, fade for tab content).
+- [x] **Splash screen** — Soft fade-in of ZenMath wordmark, 1.5s, `Hero` transition to home.
+- [x] **Loading states** — Shimmer/skeleton for async data (streak, XP, chart data).
+- [x] **Error states** — Friendly error messages with retry CTA, not raw "Err" text.
+- [x] **Empty states** — Thoughtful empty states for history (no sessions yet) and stats (no data yet).
+- [x] **Pull-to-refresh** — Custom refresh indicator with gold accent.
+- [x] **Scroll physics** — `BouncingScrollPhysics` everywhere for iOS-like feel.
+- [x] **Edge-to-edge treatment** — Proper `SystemUiOverlayStyle` for status bar + nav bar theming.
+- [x] **App icon** — Minimal ZenMath icon (gold accent on dark) for launcher.
+- [x] **Review all animations at 2-5x speed** — Check for timing issues, sync problems.
+- [x] **Performance audit** — 60fps check on real device, jank elimination, `RepaintBoundary` placement.
+- [x] **Accessibility audit** — `Semantics` on all interactive elements, contrast ratios, font scaling.
 
 ---
 

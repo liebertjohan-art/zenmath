@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'zen_colors.dart';
 import 'zen_typography.dart';
 import 'zen_design_tokens.dart';
@@ -67,6 +68,13 @@ class AppTheme {
         elevation: 0,
         centerTitle: false,
         scrolledUnderElevation: 0,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
+      ),
+      pageTransitionsTheme: const PageTransitionsTheme(
+        builders: {
+          TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+          TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+        },
       ),
     );
   }
@@ -97,6 +105,13 @@ class AppTheme {
         centerTitle: false,
         scrolledUnderElevation: 0,
         iconTheme: IconThemeData(color: Color(0xFF1A1A24)),
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
+      ),
+      pageTransitionsTheme: const PageTransitionsTheme(
+        builders: {
+          TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+          TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+        },
       ),
     );
   }

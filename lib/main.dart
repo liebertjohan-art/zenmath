@@ -11,6 +11,7 @@ import 'features/practice/practice_screen.dart';
 import 'features/results/results_screen.dart';
 import 'providers/theme_provider.dart';
 import 'core/utils/animations.dart';
+import 'features/splash/splash_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,8 +27,12 @@ final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
 final _router = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/play',
+  initialLocation: '/splash',
   routes: [
+    GoRoute(
+      path: '/splash',
+      builder: (context, state) => const SplashScreen(),
+    ),
     ShellRoute(
       navigatorKey: _shellNavigatorKey,
       builder: (context, state, child) {

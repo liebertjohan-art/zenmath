@@ -6,6 +6,7 @@ import '../../core/theme/zen_design_tokens.dart';
 import '../../core/theme/zen_spacing.dart';
 import '../../core/widgets/zen_card.dart';
 import '../../core/widgets/zen_segmented_control.dart';
+import '../../core/widgets/zen_skeleton.dart';
 import '../../providers/progress_provider.dart';
 
 class StatsScreen extends ConsumerStatefulWidget {
@@ -59,11 +60,30 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
                     }
                     return _buildStatsContent(context, tokens, stats);
                   },
-                  loading: () => const Center(
-                    child: Padding(
-                      padding: EdgeInsets.all(48.0),
-                      child: CircularProgressIndicator(),
-                    )
+                  loading: () => Padding(
+                    padding: const EdgeInsets.only(top: ZenSpacing.xl),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ZenSkeleton(width: double.infinity, height: 260, borderRadius: 24),
+                        const SizedBox(height: ZenSpacing.xl),
+                        Row(
+                          children: [
+                            Expanded(child: ZenSkeleton(width: double.infinity, height: 100, borderRadius: 24)),
+                            const SizedBox(width: ZenSpacing.md),
+                            Expanded(child: ZenSkeleton(width: double.infinity, height: 100, borderRadius: 24)),
+                          ],
+                        ),
+                        const SizedBox(height: ZenSpacing.md),
+                        Row(
+                          children: [
+                            Expanded(child: ZenSkeleton(width: double.infinity, height: 100, borderRadius: 24)),
+                            const SizedBox(width: ZenSpacing.md),
+                            Expanded(child: ZenSkeleton(width: double.infinity, height: 100, borderRadius: 24)),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                   error: (e, _) => Text('Error: $e'),
                 ),
