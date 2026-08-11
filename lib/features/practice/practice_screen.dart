@@ -58,11 +58,11 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> with TickerProv
     
     // Spring-like shake physics
     _shakeAnimation = TweenSequence<double>([
-      TweenSequenceItem(tween: Tween(begin: 0, end: -12).chain(CurveTween(curve: Curves.easeOutCubic)), weight: 1),
-      TweenSequenceItem(tween: Tween(begin: -12, end: 12).chain(CurveTween(curve: Curves.easeInOutSine)), weight: 2),
-      TweenSequenceItem(tween: Tween(begin: 12, end: -8).chain(CurveTween(curve: Curves.easeInOutSine)), weight: 2),
-      TweenSequenceItem(tween: Tween(begin: -8, end: 4).chain(CurveTween(curve: Curves.easeInOutSine)), weight: 2),
-      TweenSequenceItem(tween: Tween(begin: 4, end: 0).chain(CurveTween(curve: Curves.easeOutCubic)), weight: 1),
+      TweenSequenceItem(tween: Tween<double>(begin: 0.0, end: -12.0).chain(CurveTween(curve: Curves.easeOutCubic)), weight: 1),
+      TweenSequenceItem(tween: Tween<double>(begin: -12.0, end: 12.0).chain(CurveTween(curve: Curves.easeInOutSine)), weight: 2),
+      TweenSequenceItem(tween: Tween<double>(begin: 12.0, end: -8.0).chain(CurveTween(curve: Curves.easeInOutSine)), weight: 2),
+      TweenSequenceItem(tween: Tween<double>(begin: -8.0, end: 4.0).chain(CurveTween(curve: Curves.easeInOutSine)), weight: 2),
+      TweenSequenceItem(tween: Tween<double>(begin: 4.0, end: 0.0).chain(CurveTween(curve: Curves.easeOutCubic)), weight: 1),
     ]).animate(_shakeController);
 
     _generateQuestion();
