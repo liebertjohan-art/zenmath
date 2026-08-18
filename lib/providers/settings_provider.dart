@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../core/utils/haptics.dart';
 
 class AppSettings {
   final String defaultDifficulty;
@@ -40,10 +41,12 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
 
   Future<void> _loadSettings() async {
     final prefs = await SharedPreferences.getInstance();
+    final haptics = prefs.getBool('hapticsEnabled') ?? true;
+    ZenHaptics.enabled = haptics;
     state = AppSettings(
       defaultDifficulty: prefs.getString('defaultDifficulty') ?? 'easy',
       questionCount: prefs.getInt('questionCount') ?? 10,
-      hapticsEnabled: prefs.getBool('hapticsEnabled') ?? true,
+      hapticsEnabled: haptics,
       animationsEnabled: prefs.getBool('animationsEnabled') ?? true,
     );
   }
@@ -61,6 +64,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
   }
 
   Future<void> toggleHaptics(bool val) async {
+    ZenHaptics.enabled = val;
     state = state.copyWith(hapticsEnabled: val);
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('hapticsEnabled', val);

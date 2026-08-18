@@ -30,7 +30,6 @@ class SettingsScreen extends ConsumerWidget {
       ),
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: ZenSpacing.xl, vertical: ZenSpacing.lg),
-        physics: const BouncingScrollPhysics(),
         children: [
           _buildSectionTitle(context, tokens, 'APPEARANCE'),
           ZenCard(
@@ -69,7 +68,7 @@ class SettingsScreen extends ConsumerWidget {
                   trailing: const SizedBox.shrink(),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 56, right: ZenSpacing.md, bottom: ZenSpacing.md),
+                  padding: const EdgeInsets.fromLTRB(ZenSpacing.xs, 0, ZenSpacing.xs, ZenSpacing.md),
                   child: ZenSegmentedControl<String>(
                     groupValue: settings.defaultDifficulty,
                     values: const ['easy', 'medium', 'hard'],

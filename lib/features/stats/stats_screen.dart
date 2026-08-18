@@ -32,7 +32,6 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
         elevation: 0,
       ),
       body: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
         slivers: [
           SliverPadding(
             padding: const EdgeInsets.fromLTRB(ZenSpacing.xl, ZenSpacing.lg, ZenSpacing.xl, 100),
@@ -51,10 +50,10 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
                 statsAsync.when(
                   data: (stats) {
                     if (stats['totalSessions'] == 0) {
-                      return const Center(
+                      return Center(
                         child: Padding(
-                          padding: EdgeInsets.all(32.0),
-                          child: Text('No data for this period'),
+                          padding: const EdgeInsets.all(32.0),
+                          child: Text('No data for this period', style: TextStyle(color: tokens.textTertiary)),
                         )
                       );
                     }
@@ -203,11 +202,19 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
   }
 
   Widget _buildChart(ZenDesignTokens tokens, List<Map<String, dynamic>> chartData) {
-    if (chartData.isEmpty) return const SizedBox();
+    if (chartData.isEmpty) {
+      return Center(
+        child: Text(
+          'No activity recorded yet',
+          style: TextStyle(color: tokens.textTertiary),
+        ),
+      );
+    }
 
-    List<FlSpot> spots = [];
-    double minX = 0;
-    double maxX = (chartData.length - 1).toDouble();
+    final isSinglePoint = chartData.length == 1;
+    final List<FlSpot> spots = [];
+    final double minX = isSinglePoint ? -0.5 : 0.0;
+    final double maxX = isSinglePoint ? 0.5 : (chartData.length - 1).toDouble();
 
     for (int i = 0; i < chartData.length; i++) {
       spots.add(FlSpot(i.toDouble(), chartData[i]['accuracy'] as double));
@@ -216,7 +223,7 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
     return LineChart(
       LineChartData(
         minY: 0,
-        maxY: 1.0,
+        maxY: 1.05,
         minX: minX,
         maxX: maxX,
         gridData: FlGridData(
@@ -225,7 +232,7 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
           horizontalInterval: 0.25,
           getDrawingHorizontalLine: (value) {
             return FlLine(
-              color: tokens.surfaceVariant,
+              color: tokens.divider,
               strokeWidth: 1,
               dashArray: [5, 5],
             );
@@ -240,10 +247,13 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
               showTitles: true,
               reservedSize: 30,
               getTitlesWidget: (value, meta) {
-                if (value % 1 != 0 || value < 0 || value >= chartData.length) return const SizedBox();
-                final date = chartData[value.toInt()]['date'] as DateTime;
+                final int idx = value.round();
+                if (idx < 0 || idx >= chartData.length || (value - idx).abs() > 0.01) {
+                  return const SizedBox();
+                }
+                final date = chartData[idx]['date'] as DateTime;
                 // Only show a few labels if many points
-                if (chartData.length > 7 && value.toInt() % (chartData.length ~/ 4) != 0) {
+                if (chartData.length > 7 && idx % (chartData.length ~/ 4) != 0) {
                   return const SizedBox();
                 }
                 return Padding(
@@ -259,8 +269,10 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
           leftTitles: AxisTitles(
             sideTitles: SideTitles(
               showTitles: true,
-              reservedSize: 40,
+              interval: 0.25,
+              reservedSize: 36,
               getTitlesWidget: (value, meta) {
+                if (value > 1.0) return const SizedBox();
                 return Text(
                   '${(value * 100).toInt()}%',
                   style: TextStyle(color: tokens.textTertiary, fontSize: 10),
@@ -273,14 +285,23 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
         lineBarsData: [
           LineChartBarData(
             spots: spots,
-            isCurved: true,
+            isCurved: chartData.length > 1,
+            curveSmoothness: 0.35,
             color: tokens.primary,
             barWidth: 3,
             isStrokeCapRound: true,
-            dotData: const FlDotData(show: false),
+            dotData: FlDotData(
+              show: true,
+              getDotPainter: (spot, percent, barData, index) => FlDotCirclePainter(
+                radius: isSinglePoint ? 6 : 4,
+                color: tokens.primary,
+                strokeWidth: 2,
+                strokeColor: tokens.surface,
+              ),
+            ),
             belowBarData: BarAreaData(
               show: true,
-              color: tokens.primary.withOpacity(0.1),
+              color: tokens.primary.withOpacity(0.12),
             ),
           ),
         ],

@@ -57,7 +57,7 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
             color: tokens.primary,
             backgroundColor: tokens.surfaceVariant,
             child: ListView.builder(
-              physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+              physics: const AlwaysScrollableScrollPhysics(),
               padding: const EdgeInsets.fromLTRB(ZenSpacing.xl, ZenSpacing.lg, ZenSpacing.xl, 100),
               itemCount: sessions.length,
               itemBuilder: (context, index) {

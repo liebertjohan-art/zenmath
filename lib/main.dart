@@ -106,10 +106,18 @@ final _router = GoRouter(
   ],
 );
 
-class _ZenScrollBehavior extends ScrollBehavior {
+class _ZenScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Widget buildOverscrollIndicator(BuildContext context, Widget child, ScrollableDetails details) {
+    return StretchingOverscrollIndicator(
+      axisDirection: details.direction,
+      child: child,
+    );
+  }
+
   @override
   ScrollPhysics getScrollPhysics(BuildContext context) {
-    return const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics());
+    return const ClampingScrollPhysics(parent: AlwaysScrollableScrollPhysics());
   }
 }
 
