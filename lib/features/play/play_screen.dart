@@ -203,6 +203,8 @@ class PlayScreen extends ConsumerWidget {
             
             // Topic Grid
             _TopicGrid(),
+            
+            const SizedBox(height: 100),
           ],
         ),
       ),
@@ -232,7 +234,7 @@ class _TopicGrid extends StatelessWidget {
         crossAxisCount: 2,
         crossAxisSpacing: ZenSpacing.md,
         mainAxisSpacing: ZenSpacing.md,
-        childAspectRatio: 1.5,
+        childAspectRatio: 1.4,
       ),
       itemBuilder: (context, index) {
         return _TopicCard(
@@ -350,22 +352,34 @@ class _TopicCardState extends State<_TopicCard> with SingleTickerProviderStateMi
       child: SlideTransition(
         position: _slideAnimation,
         child: ZenCard(
+          padding: const EdgeInsets.all(ZenSpacing.md),
           onTap: () => _showDifficultySheet(context),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                widget.icon,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      color: tokens.primary,
-                      fontSize: 28,
-                    ),
+              Container(
+                width: 38,
+                height: 38,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: tokens.primary.withOpacity(0.12),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  widget.icon,
+                  style: TextStyle(
+                    color: tokens.primary,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                  ),
+                ),
               ),
-              const SizedBox(height: ZenSpacing.xs),
               Text(
                 widget.name,
-                style: Theme.of(context).textTheme.titleMedium,
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),

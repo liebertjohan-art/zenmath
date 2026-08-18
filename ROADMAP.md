@@ -15,19 +15,19 @@
 > **Priority:** P0
 
 ### Sub-tasks for Phase 12:
-- [ ] **Global Design System Polish:**
+- [x] **Global Design System Polish:**
   - Remove bulky shadows from cards. Transition to a flatter, sleek, modern look with very subtle ambient shadows or borders.
   - Improve section dividers (cleaner, subtle).
   - Update Light Theme colors to use soft white, natural blue/light blue, and Material You dynamic colors if available.
   - Ensure the Session Complete / Results page uses satisfying green accents.
-- [ ] **Pill Bottom Navigation:**
+- [x] **Pill Bottom Navigation:**
   - Redesign bottom navigation to be a floating "pill" style.
   - Reserve space at the bottom so content (lists/grids) doesn't scroll *underneath* the pill and get hidden, but the pill floats above the reserved space.
   - Implement animation: When pushing to a new page (e.g., practice), the pill expands/merges into the page. On back, it morphs back to a pill.
-- [ ] **Topic Cards & Glassmorphism Menu:**
+- [x] **Topic Cards & Glassmorphism Menu:**
   - Redesign topic cards for a sleeker look.
   - When clicking a topic card, the difficulty menu must appear using a premium glassmorphism (blur) effect (`BackdropFilter`).
-- [ ] **Animations & Scrolling:**
+- [x] **Animations & Scrolling:**
   - Ensure smooth scrolling globally (`BouncingScrollPhysics` or tight physics).
   - Add brutal, clean page transition animations (no crazy/bouncy animations, just sharp, elegant curves).
 

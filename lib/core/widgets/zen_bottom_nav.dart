@@ -1,6 +1,8 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../theme/zen_design_tokens.dart';
+import '../utils/haptics.dart';
 
 class ScaffoldWithNavBar extends StatelessWidget {
   final Widget child;
@@ -13,56 +15,73 @@ class ScaffoldWithNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = Theme.of(context).extension<ZenDesignTokens>()!;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       backgroundColor: tokens.background,
+      extendBody: true,
       body: child,
       bottomNavigationBar: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
-          child: Container(
-            decoration: BoxDecoration(
-              color: tokens.surface.withOpacity(0.95),
-              borderRadius: BorderRadius.circular(999),
-              border: Border.all(
-                color: tokens.divider,
-                width: 0.5,
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 20,
-                  offset: const Offset(0, 8),
+          padding: const EdgeInsets.fromLTRB(24, 0, 24, 20),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(999),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: tokens.surface.withOpacity(isDark ? 0.85 : 0.90),
+                  borderRadius: BorderRadius.circular(999),
+                  border: Border.all(
+                    color: tokens.divider,
+                    width: 0.8,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(isDark ? 0.35 : 0.08),
+                      blurRadius: 24,
+                      offset: const Offset(0, 8),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _NavBarItem(
-                    icon: Icons.play_arrow_rounded,
-                    label: 'Play',
-                    isSelected: _calculateSelectedIndex(context) == 0,
-                    onTap: () => context.go('/play'),
-                    tokens: tokens,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      _NavBarItem(
+                        icon: Icons.play_arrow_rounded,
+                        label: 'Play',
+                        isSelected: _calculateSelectedIndex(context) == 0,
+                        onTap: () {
+                          ZenHaptics.selection();
+                          context.go('/play');
+                        },
+                        tokens: tokens,
+                      ),
+                      _NavBarItem(
+                        icon: Icons.history_rounded,
+                        label: 'History',
+                        isSelected: _calculateSelectedIndex(context) == 1,
+                        onTap: () {
+                          ZenHaptics.selection();
+                          context.go('/history');
+                        },
+                        tokens: tokens,
+                      ),
+                      _NavBarItem(
+                        icon: Icons.bar_chart_rounded,
+                        label: 'Stats',
+                        isSelected: _calculateSelectedIndex(context) == 2,
+                        onTap: () {
+                          ZenHaptics.selection();
+                          context.go('/stats');
+                        },
+                        tokens: tokens,
+                      ),
+                    ],
                   ),
-                  _NavBarItem(
-                    icon: Icons.history_rounded,
-                    label: 'History',
-                    isSelected: _calculateSelectedIndex(context) == 1,
-                    onTap: () => context.go('/history'),
-                    tokens: tokens,
-                  ),
-                  _NavBarItem(
-                    icon: Icons.bar_chart_rounded,
-                    label: 'Stats',
-                    isSelected: _calculateSelectedIndex(context) == 2,
-                    onTap: () => context.go('/stats'),
-                    tokens: tokens,
-                  ),
-                ],
+                ),
               ),
             ),
           ),
@@ -106,7 +125,7 @@ class _NavBarItem extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           AnimatedScale(
-            scale: isSelected ? 1.05 : 1.0,
+            scale: isSelected ? 1.08 : 1.0,
             duration: const Duration(milliseconds: 200),
             curve: Curves.easeOutCubic,
             child: Icon(icon, color: color, size: 24),

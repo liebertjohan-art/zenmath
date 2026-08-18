@@ -35,7 +35,7 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
         physics: const BouncingScrollPhysics(),
         slivers: [
           SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: ZenSpacing.xl, vertical: ZenSpacing.lg),
+            padding: const EdgeInsets.fromLTRB(ZenSpacing.xl, ZenSpacing.lg, ZenSpacing.xl, 100),
             sliver: SliverList(
               delegate: SliverChildListDelegate([
                 ZenSegmentedControl<int>(
