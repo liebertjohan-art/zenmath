@@ -49,8 +49,12 @@ final statsProvider = FutureProvider.autoDispose.family<Map<String, dynamic>, in
   final isar = await isarService.db;
   
   final now = DateTime.now();
-  final allSessions = await isar.collection<SessionScore>().where().sortByTimestampAsc().findAll();
-  final allProgress = await isar.collection<DailyProgress>().where().sortByDateAsc().findAll();
+  final cutoff = days > 0
+      ? DateTime(now.year, now.month, now.day).subtract(Duration(days: days))
+      : DateTime.fromMillisecondsSinceEpoch(0);
+
+  final allSessions = await isar.collection<SessionScore>().where().sortByTimestamp().findAll();
+  final allProgress = await isar.collection<DailyProgress>().where().sortByDate().findAll();
 
   final sessions = days > 0
       ? allSessions.where((s) => !s.timestamp.isBefore(cutoff)).toList()
